@@ -8,7 +8,7 @@ namespace EducationSystem.Models
     {
         public Project()
         {
-            this.Feedbacks = new HashSet<ProjectFeedbackRank>();
+            this.Feedbacks = new HashSet<FeedbackRank>();
             this.Resources = new HashSet<Resource>();
             this.Contributors = new HashSet<Account>();
             this.Pending = new HashSet<PendingProjectRequest>();
@@ -25,19 +25,19 @@ namespace EducationSystem.Models
 
         public string Description { get; set; }
 
-        public string Needs { get; set; }
+        public string Requirements { get; set; }
 
         public bool IsTeamFormed { get; set; }
 
         public int ProductOwnerId { get; set; }
 
-        public Account ProductOwner { get; set; }
-        
-        public ICollection<ProjectFeedbackRank> Feedbacks { get; set; }
+        public Account ProductOwner { get; set; } // ApplcationUser
+
+        public ICollection<FeedbackRank> Feedbacks { get; set; }
 
         public ICollection<Resource> Resources { get; set; }
 
-        public ICollection<DeveloperType> DeveloperTypesNeeded { get; set; }
+        public ICollection<SkillType> DeveloperTypesNeeded { get; set; }
 
         public ICollection<Account> Contributors { get; set; }
 
