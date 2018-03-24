@@ -112,47 +112,5 @@ namespace EducationSystem.Services
                 db.SaveChanges();
             }
         }
-
-        public ICollection<ApplicationUser> GetParticipants(int id)
-        {
-            var project = new Project();
-
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
-            {
-                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == id);
-            }
-
-            var participants = project.AcceptedDevelopers?.Select(d => d.Account).ToList();
-
-            return participants;
-        }
-
-        public ICollection<ApplicationUser> GetReceivedRequests(int id)
-        {
-            var project = new Project();
-
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
-            {
-                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == id);
-            }
-
-            var receivedRequests = project.ReceivedRequests?.Select(d => d.Account).ToList();
-
-            return receivedRequests;
-        }
-
-        public ICollection<ApplicationUser> GetRequestedDevelopers(int id)
-        {
-            var project = new Project();
-
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
-            {
-                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == id);
-            }
-
-            var participants = project.RequestedDevelopers?.Select(d => d.Account).ToList();
-
-            return participants;
-        }
     }
 }

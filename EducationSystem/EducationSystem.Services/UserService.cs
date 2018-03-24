@@ -3,6 +3,7 @@ using EducationSystem.Models;
 using EducationSystem.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,48 @@ namespace EducationSystem.Services
             return targetUsers;
         }
 
+        public ICollection<ApplicationUser> GetParticipants(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == id);
+            }
+
+            var participants = project.AcceptedDevelopers?.Select(d => d.Account).ToList();
+
+            return participants;
+        }
+
+        public ICollection<ApplicationUser> GetReceivedRequests(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == id);
+            }
+
+            var receivedRequests = project.ReceivedRequests?.Select(d => d.Account).ToList();
+
+            return receivedRequests;
+        }
+
+        public ICollection<ApplicationUser> GetRequestedDevelopers(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == id);
+            }
+
+            var participants = project.RequestedDevelopers?.Select(d => d.Account).ToList();
+
+            return participants;
+        }
+
         private static List<ApplicationUser> GetUsersWithMatchingRank(int skillType, double minumRank, List<ApplicationUser> usersWithSkill)
         {
             var targetUsers = new List<ApplicationUser>();
@@ -58,6 +101,5 @@ namespace EducationSystem.Services
 
             return targetUsers;
         }
-        
     }
 }
