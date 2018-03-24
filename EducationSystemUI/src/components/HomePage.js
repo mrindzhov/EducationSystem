@@ -1,9 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HeaderNavigation from './header/HeaderNavigation';
+
+import { get } from '../webapi/dbaccess';
+
+const getData = () => {
+  get().then((json) => {
+    console.log(json);    
+  })
+}
 
 const HomePage = () => (
   <div>
-    Home <Link to='/isLogged'>Check User</Link>
+    <HeaderNavigation />
+    <button onClick={getData}>Get Data</button>
   </div>
 );
 
