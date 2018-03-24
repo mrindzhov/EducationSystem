@@ -1,7 +1,5 @@
-﻿namespace EducationSystem.Models.Account.Dtos
+﻿namespace EducationSystem.Dtos.Account
 {
-    // Models returned by AccountController actions.
-
     public class ExternalLoginDTO
     {
         public string Name { get; set; }

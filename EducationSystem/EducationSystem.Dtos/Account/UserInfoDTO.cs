@@ -1,4 +1,4 @@
-﻿namespace EducationSystem.Models.Account.Dtos
+﻿namespace EducationSystem.Dtos.Account
 {
     public class UserInfoDTO
     {

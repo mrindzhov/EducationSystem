@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace EducationSystem.Models.Account.AccountBindings
+namespace EducationSystem.Dtos.Account
 {
     public class RegisterDTO
     {

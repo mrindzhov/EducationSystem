@@ -4,11 +4,9 @@ using EducationSystem.Models;
 using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using System.Linq;
-using EducationSystem.Models.Enums;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web.Security;
+using EducationSystem.Dtos.Project;
 
 namespace EducationSystem.WebApi.Controllers
 {
@@ -128,7 +126,7 @@ namespace EducationSystem.WebApi.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Edit(ProjectFilterDTO filter)
+        public IHttpActionResult Edit(ProjectFilter filter)
         {
             return Json("");
         }

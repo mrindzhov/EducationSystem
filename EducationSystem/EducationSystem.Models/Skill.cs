@@ -1,5 +1,5 @@
-﻿using EducationSystem.Models.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using EducationSystem.Models.Enums;
 
 namespace EducationSystem.Models
 {

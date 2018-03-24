@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EducationSystem.Models.Account.Dtos
+namespace EducationSystem.Dtos.Account
 {
     public class ManageInfoDTO
     {

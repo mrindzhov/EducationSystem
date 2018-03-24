@@ -1,8 +1,6 @@
-﻿using EducationSystem.Models.Mappings;
-using System;
-using EducationSystem.Models.Enums;
+﻿using System;
 using System.Collections.Generic;
-using EducationSystem.Models.Account;
+using EducationSystem.Models.Mappings;
 
 namespace EducationSystem.Models
 {

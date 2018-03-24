@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using EducationSystem.Models.Mappings;
-using System.ComponentModel.DataAnnotations;
 
 namespace EducationSystem.Models
 {

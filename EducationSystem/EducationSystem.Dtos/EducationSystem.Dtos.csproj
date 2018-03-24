@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3908044C-0D88-4813-818D-248BB35EAC46}</ProjectGuid>
+    <ProjectGuid>{380E1D56-FBDA-491A-931B-B438EE3DA02B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EducationSystem.Models</RootNamespace>
-    <AssemblyName>EducationSystem.Models</AssemblyName>
+    <RootNamespace>EducationSystem.Dtos</RootNamespace>
+    <AssemblyName>EducationSystem.Dtos</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,18 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -56,26 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUser.cs" />
-    <Compile Include="Enums\DeveloperLevel.cs" />
-    <Compile Include="Enums\FeedbackRank.cs" />
-    <Compile Include="Mappings\AccountProject.cs" />
-    <Compile Include="Mappings\AcceptedProjectRequest.cs" />
-    <Compile Include="Enums\SkillType.cs" />
-    <Compile Include="Feedback.cs" />
-    <Compile Include="Mappings\RequestedProjectRequest.cs" />
-    <Compile Include="Enums\AccountType.cs" />
-    <Compile Include="Enums\ProjectStatus.cs" />
-    <Compile Include="Mappings\ReceivedProjectRequest.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="Account\AddExternalLoginDTO.cs" />
+    <Compile Include="Account\ChangePasswordDTO.cs" />
+    <Compile Include="Project\CreateProjectDTO.cs" />
+    <Compile Include="Account\ExternalLoginDTO.cs" />
+    <Compile Include="Account\ManageInfoDTO.cs" />
+    <Compile Include="Project\ProjectFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.cs" />
-    <Compile Include="Skill.cs" />
+    <Compile Include="Account\RegisterDTO.cs" />
+    <Compile Include="Account\RegisterExternalDTO.cs" />
+    <Compile Include="Account\RemoveLoginDTO.cs" />
+    <Compile Include="Account\SetPasswordDTO.cs" />
+    <Compile Include="Account\UserInfoDTO.cs" />
+    <Compile Include="Account\UserLoginInfoDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EducationSystem.Models\EducationSystem.Models.csproj">
+      <Project>{3908044C-0D88-4813-818D-248BB35EAC46}</Project>
+      <Name>EducationSystem.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

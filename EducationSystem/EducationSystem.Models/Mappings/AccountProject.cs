@@ -1,5 +1,4 @@
-﻿using EducationSystem.Models.Account;
-
+﻿
 namespace EducationSystem.Models.Mappings
 {
     public abstract class AccountProject
