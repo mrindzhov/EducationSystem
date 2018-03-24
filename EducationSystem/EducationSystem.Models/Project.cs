@@ -36,7 +36,7 @@ namespace EducationSystem.Models
 
         public bool IsTeamFormed { get; set; }
 
-        public int ProductOwnerId { get; set; }
+        public string ProductOwnerId { get; set; }
 
         public ApplicationUser ProductOwner { get; set; }
 
