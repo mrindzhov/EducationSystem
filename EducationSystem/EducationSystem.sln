@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSystem.Data", "EducationSystem.Data\EducationSystem.Data.csproj", "{4FCDAEE2-C93C-42A1-97B2-0FD9C283261C}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSystem.Models", "EducationSystem.Models\EducationSystem.Models.csproj", "{3908044C-0D88-4813-818D-248BB35EAC46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSystem.WebApi", "EducationSystem.WebApi\EducationSystem.WebApi.csproj", "{BE728B29-7D96-4EBB-995F-2CCA2CDE48BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSystem.UI", "EducationSystem.UI\EducationSystem.UI.csproj", "{83C058DC-47E6-46EA-9630-EAFDF08D5DE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BE728B29-7D96-4EBB-995F-2CCA2CDE48BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE728B29-7D96-4EBB-995F-2CCA2CDE48BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE728B29-7D96-4EBB-995F-2CCA2CDE48BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C058DC-47E6-46EA-9630-EAFDF08D5DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C058DC-47E6-46EA-9630-EAFDF08D5DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C058DC-47E6-46EA-9630-EAFDF08D5DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C058DC-47E6-46EA-9630-EAFDF08D5DE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
