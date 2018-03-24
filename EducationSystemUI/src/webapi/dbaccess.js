@@ -74,7 +74,16 @@ export function get() {
 }
 
 export function register(user) {
-    return sendRequest(`${host}api/account/register`, RequestMethod.POST, user).then(res => {
-        return res;
-    });
+    var url = `${host}api/account/register`;
+    var data = user;
+    console.log(JSON.stringify(data))
+    fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
 }
