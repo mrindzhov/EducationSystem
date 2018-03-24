@@ -2,11 +2,13 @@
 using EducationSystem.Data;
 using EducationSystem.Models;
 using System.Web.Http.Cors;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using EducationSystem.Models.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web.Security;
 
 namespace EducationSystem.WebApi.Controllers
 {
@@ -94,7 +96,40 @@ namespace EducationSystem.WebApi.Controllers
         [HttpPost]
         public IHttpActionResult Create(CreateProjectDTO proj)
         {
-            var project = new Project();
+            //Not tested for correct userId
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                //var mmm = Membership.GetUser(User.Identity.Name).ProviderUserKey;
+                var userId = int.Parse(User.Identity.GetUserId());
+
+                try
+                {
+                    var project = new Project
+                    {
+                        Name = proj.Name,
+                        GitHubUrl = proj.GitHubUrl,
+                        Description = proj.Description,
+                        Requirements = proj.Requirements,
+                        SkillsNeeded = proj.SkillsNeeded,
+                        CreateDate = DateTime.Now,
+                        ProductOwnerId = userId
+                    };
+
+                    db.Projects.Add(project);
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+
+                return Ok();
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult Edit(ProjectFilterDTO filter)
+        {
             return Json("");
         }
     }
