@@ -56,9 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountBindingModels.cs" />
-    <Compile Include="AccountViewModels.cs" />
-    <Compile Include="IdentityModels.cs" />
+    <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\ProjectFeedbackRank.cs" />
+    <Compile Include="Enums\ProjectStatus.cs" />
+    <Compile Include="Enums\TechnologyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
