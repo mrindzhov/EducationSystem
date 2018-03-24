@@ -26,9 +26,11 @@
 
 .header-navigation ul li:hover {
     background-color: #187b04;
+    cursor: pointer;
 }
 
 .header-navigation ul li a {
     text-decoration: none;
     color: #fff;
+    outline: none;
 }

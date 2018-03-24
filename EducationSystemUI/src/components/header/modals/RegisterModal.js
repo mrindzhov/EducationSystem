@@ -1,24 +1,24 @@
 import React from 'react';
 import Modal from 'react-modal';
 import LinkButton from '../../button/LinkButton';
-import './LoginModal.css';
+import './RegisterModal.css';
 
-const LoginModal = (props) => (
+const RegisterModal = (props) => (
   <Modal
     isOpen={props.isOpen}
-    onRequestClose={() => props.closeModal("login")}
-    contentLabel="Login"
+    onRequestClose={() => props.closeModal("register")}
+    contentLabel="Register"
     className="modal"
     shouldCloseOnEsc={true}
     shouldCloseOnOverlayClick={true}
   >
-    <h3 className="modal__title">Login</h3>
+    <h3 className="modal__title">Register</h3>
     <div className=".modal__body">
       <input type="text" className="input-credentials" placeholder="email"></input>
       <input type="password" className="input-credentials" placeholder="password"></input>
     </div>
-    <LinkButton>Login</LinkButton>
+    <LinkButton>Register</LinkButton>
   </Modal>
 );
 
-export default LoginModal;
+export default RegisterModal;

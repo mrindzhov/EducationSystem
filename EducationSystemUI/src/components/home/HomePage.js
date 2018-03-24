@@ -4,7 +4,7 @@ import HeaderNavigation from '../header/HeaderNavigation';
 import './HomePage.css';
 
 import { get } from '../../webapi/dbaccess';
-import LinkButton from '../button/LinkButton';
+import Button from '../button/Button';
 
 const getData = () => {
   get().then((json) => {
@@ -18,8 +18,8 @@ const HomePage = () => (
       <HeaderNavigation />
       <div class="hero-box">
         <h1>Teamwork Education</h1>
-        <LinkButton>Login</LinkButton>
-        <LinkButton>Register</LinkButton>
+        {/* <Button>Login</Button>
+        <Button>Register</Button> */}
       </div>
     </header>
   </div>
