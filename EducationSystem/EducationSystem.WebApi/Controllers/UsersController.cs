@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -26,9 +22,9 @@ namespace EducationSystem.WebApi.Controllers
                 }
             };
 
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, messages);
+            return Json(messages);
         }
 
         public IHttpActionResult Post(object message)
