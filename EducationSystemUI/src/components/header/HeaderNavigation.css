@@ -1,0 +1,22 @@
+.header-navigation {
+    display: flex;
+    background-color: #e67e22;
+    height: 50px;
+}
+
+.header-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+}
+
+.header-navigation ul li {
+    list-style: none;
+    line-height: 50px;
+    padding: 0 10px;
+}
+
+.header-navigation ul li a {
+    text-decoration: none;
+    color: #fff;
+}

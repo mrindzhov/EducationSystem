@@ -13,6 +13,10 @@ namespace EducationSystem.Models.Accounts
 
         public string Name { get; set; }
 
+        public int ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
         public ICollection<Project> PublishedProjects { get; set; }
     }
 }

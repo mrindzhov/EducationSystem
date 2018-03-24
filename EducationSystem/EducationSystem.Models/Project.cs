@@ -22,6 +22,10 @@ namespace EducationSystem.Models
 
         public string Name { get; set; }
 
+        public DateTime CreateDate { get; set; }
+
+        public string GitHubUrl { get; set; }
+
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
