@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import LinkButton from '../../button/LinkButton';
+import Button from '../../button/Button';
 import './RegisterModal.css';
 
 const RegisterModal = (props) => (
@@ -14,10 +14,10 @@ const RegisterModal = (props) => (
   >
     <h3 className="modal__title">Register</h3>
     <div className=".modal__body">
-      <input type="text" className="input-credentials" placeholder="email"></input>
-      <input type="password" className="input-credentials" placeholder="password"></input>
+      <input type="text" className="input-credentials" name="email" placeholder="email" value={props.email} onChange={props.onChange}></input>
+      <input type="password" className="input-credentials" name="password" placeholder="password" value={props.password} onChange={props.onChange}></input>
     </div>
-    <LinkButton>Register</LinkButton>
+    <Button onClick={props.onRegister}>Register</Button>
   </Modal>
 );
 

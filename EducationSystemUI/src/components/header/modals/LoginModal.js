@@ -14,8 +14,20 @@ const LoginModal = (props) => (
   >
     <h3 className="modal__title">Login</h3>
     <div className=".modal__body">
-      <input type="text" className="input-credentials" placeholder="email"></input>
-      <input type="password" className="input-credentials" placeholder="password"></input>
+      <input 
+        type="text" 
+        className="input-credentials" 
+        name="email" 
+        placeholder="email" 
+        value={props.email}
+        onChange={props.onChange}></input>
+      <input 
+        type="password" 
+        className="input-credentials" 
+        name="password" 
+        placeholder="password" 
+        value={props.password}
+        onChange={props.onChange}></input>
     </div>
     <LinkButton>Login</LinkButton>
   </Modal>
