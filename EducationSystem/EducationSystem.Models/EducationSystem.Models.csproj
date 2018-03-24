@@ -56,11 +56,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Company.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="AccountBindings\ChangePasswordBindingModel.cs" />
+    <Compile Include="AccountBindings\RegisterBindingModel.cs" />
+    <Compile Include="AccountBindings\RegisterExternalBindingModel.cs" />
+    <Compile Include="AccountBindings\RemoveLoginBindingModel.cs" />
+    <Compile Include="AccountBindings\SetPasswordBindingModel.cs" />
+    <Compile Include="Enums\SkillType.cs" />
+    <Compile Include="PendingProjectRequest.cs" />
+    <Compile Include="AccountProject.cs" />
+    <Compile Include="AccountBindings\AddExternalLoginBindingModel.cs" />
+    <Compile Include="AccountViews\ExternalLoginViewModel.cs" />
+    <Compile Include="AccountViews\ManageInfoViewModel.cs" />
+    <Compile Include="AccountViews\UserInfoViewModel.cs" />
+    <Compile Include="AccountViews\UserLoginInfoViewModel.cs" />
     <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\LevelType.cs" />
     <Compile Include="Enums\ProjectFeedbackRank.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />
-    <Compile Include="Enums\TechnologyType.cs" />
+    <Compile Include="IdentityModels.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="AccountRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="Skill.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

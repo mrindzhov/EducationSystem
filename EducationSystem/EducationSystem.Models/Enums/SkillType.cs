@@ -1,6 +1,6 @@
 ﻿namespace EducationSystem.Models.Enums
 {
-    public enum TechnologyType
+    public enum SkillType
     {
         BackEnd = 1,
         FrontEnd = 2,
