@@ -1,35 +1,40 @@
 namespace EducationSystem.Data
 {
-    using System;
+    using EducationSystem.Data.Configurations;
+    using EducationSystem.Models;
+    using EducationSystem.Models.Accounts;
+    using EducationSystem.Models.Mappings;
     using System.Data.Entity;
-    using System.Linq;
 
     public class EducationSystemDbContext : DbContext
     {
-        // Your context has been configured to use a 'EducationSystemDbContext' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'EducationSystem.Data.EducationSystemDbContext' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'EducationSystemDbContext' 
-        // connection string in the application configuration file.
         public EducationSystemDbContext()
             : base("name=EducationSystemDbContext")
         {
         }
 
-        public static EducationSystemDbContext Create()
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
+
+        public DbSet<CompanyAccount> CompanyAccounts { get; set; }
+        
+        public DbSet<AcceptedProjectRequest> AcceptedProjectRequests { get; set; }
+
+        public DbSet<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
+
+        public DbSet<RequestedProjectRequest> RequestedProjectRequests { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Feedback> Feedbacks { get; set; }
+
+        public DbSet<Resource> Resources { get; set; }
+
+        public DbSet<Skill> Skills { get; set; }
+        
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            return new EducationSystemDbContext();
+            modelBuilder.Configurations.Add(new ProjectConfiguration());
         }
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
-
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
-    }
-
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
 }
