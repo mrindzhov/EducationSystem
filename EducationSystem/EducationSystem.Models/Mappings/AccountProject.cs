@@ -1,4 +1,6 @@
-﻿namespace EducationSystem.Models.Mappings
+﻿using EducationSystem.Models.Accounts;
+
+namespace EducationSystem.Models.Mappings
 {
     public abstract class AccountProject
     {
@@ -8,6 +10,6 @@
 
         public Project Project { get; set; }
 
-        public Account Account { get; set; }
+        public DeveloperAccount Account { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace EducationSystem.WebApi.Controllers
             return Json("");
         }
 
-        public IHttpActionResult CreateProject([FromBody])
+        public IHttpActionResult CreateProject()
         {
             var project = new Project();
             return Json("");
