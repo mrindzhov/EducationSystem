@@ -255,6 +255,10 @@
       <Project>{3908044c-0d88-4813-818d-248bb35eac46}</Project>
       <Name>EducationSystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EducationSystem.Services\EducationSystem.Services.csproj">
+      <Project>{3880555a-747d-4ac4-8290-b5e9e99bd60c}</Project>
+      <Name>EducationSystem.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,6 +6,8 @@ namespace EducationSystem.Dtos.Project
 {
     public class ProjectFilter
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string GitHubUrl { get; set; }
