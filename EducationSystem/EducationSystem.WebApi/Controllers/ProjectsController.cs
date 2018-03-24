@@ -12,7 +12,7 @@ namespace EducationSystem.WebApi.Controllers
         {
             //var project = db.Projects.Find(id).FirstOrDefault;
 
-            return Json("");
+            return Json("Hello");
         }
 
         public IHttpActionResult GetOpenedProjects()
