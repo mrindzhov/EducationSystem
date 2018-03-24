@@ -17,7 +17,7 @@ const HomePage = () => (
     <header className="home-header">
       <HeaderNavigation />
       <div class="hero-box">
-        <h1>Teamwork Education System</h1>
+        <h1>Teamwork Education</h1>
         <LinkButton>Login</LinkButton>
         <LinkButton>Register</LinkButton>
       </div>
