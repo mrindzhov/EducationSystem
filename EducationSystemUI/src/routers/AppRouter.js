@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
-import HomePage from '../components/HomePage';
+import HomePage from '../components/home/HomePage';
 import ReduxTest from '../components/ReduxTest';
 import NotFoundPage from '../components/NotFoundPage';
 
