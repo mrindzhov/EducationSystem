@@ -1,6 +1,6 @@
-﻿namespace EducationSystem.Models
+﻿namespace EducationSystem.Models.Mappings
 {
-    public class AccountRequest
+    public abstract class AccountProject
     {
         public int ProjectId { get; set; }
 

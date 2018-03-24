@@ -2,10 +2,10 @@
 {
     public enum FeedbackRank
     {
-        Poor = 0,
-        NotGood = 1,
-        Good = 2,
-        VeryGood = 3,
-        Excellent = 4
+        Poor = 2,
+        Bad = 3,
+        Good = 4,
+        VeryGood = 5,
+        Excellent = 6
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using EducationSystem.Models.Enums;
+﻿using EducationSystem.Models.Mappings;
+using System.Collections.Generic;
 
 namespace EducationSystem.Models
 {
@@ -8,8 +8,9 @@ namespace EducationSystem.Models
         public Account()
         {
             this.Skills = new HashSet<Skill>();
-            this.AcceptedProjects = new HashSet<Project>();
-            this.RequestedProjects = new HashSet<Project>();
+            this.AcceptedProjects = new HashSet<AcceptedProjectRequest>();
+            this.RequestedProjects = new HashSet<RequestedProjectRequest>();
+            this.ReceivedProjectRequests = new HashSet<ReceivedProjectRequest>();
         }
 
         public int Id { get; set; }
@@ -18,8 +19,10 @@ namespace EducationSystem.Models
 
         public ICollection<Skill> Skills { get; set; }
 
-        public ICollection<Project> RequestedProjects { get; set; }
+        public ICollection<RequestedProjectRequest> RequestedProjects { get; set; }
 
-        public ICollection<Project> AcceptedProjects { get; set; }
+        public ICollection<AcceptedProjectRequest> AcceptedProjects { get; set; }
+
+        public ICollection<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
     }
 }
