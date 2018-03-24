@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using EducationSystem.Models.Mappings;
+using System.ComponentModel.DataAnnotations;
 
 namespace EducationSystem.Models
 {
@@ -11,7 +13,10 @@ namespace EducationSystem.Models
     {
         public ApplicationUser()
         {
-            CreatedProjects = new HashSet<Project>();
+            this.Skills = new HashSet<Skill>();
+            this.AcceptedProjects = new HashSet<AcceptedProjectRequest>();
+            this.RequestedProjects = new HashSet<RequestedProjectRequest>();
+            this.ReceivedProjectRequests = new HashSet<ReceivedProjectRequest>();
         }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -20,6 +25,13 @@ namespace EducationSystem.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public ICollection<Project> CreatedProjects { get; set; }
+
+        public ICollection<Skill> Skills { get; set; }
+
+        public ICollection<RequestedProjectRequest> RequestedProjects { get; set; }
+
+        public ICollection<AcceptedProjectRequest> AcceptedProjects { get; set; }
+
+        public ICollection<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
     }
 }
