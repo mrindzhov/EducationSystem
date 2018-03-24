@@ -37,7 +37,7 @@ namespace EducationSystem.WebApi.Controllers
 
         public IHttpActionResult GetByTechnology(int techId)
         {
-            var technology = (TechnologyType)techId;
+            //var technology = (SpkillType)techId;
 
             return Json("");
         }

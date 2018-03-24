@@ -63,7 +63,6 @@
     <Compile Include="AccountBindings\RegisterExternalBindingModel.cs" />
     <Compile Include="AccountBindings\RemoveLoginBindingModel.cs" />
     <Compile Include="AccountBindings\SetPasswordBindingModel.cs" />
-    <Compile Include="AccountRequestProject.cs" />
     <Compile Include="PendingProjectRequest.cs" />
     <Compile Include="AccountProject.cs" />
     <Compile Include="AccountBindings\AddExternalLoginBindingModel.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="Enums\LevelType.cs" />
     <Compile Include="Enums\ProjectFeedbackRank.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />
-    <Compile Include="Enums\TechnologyType.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Enums\DeveloperType.cs" />
     <Compile Include="Project.cs" />
