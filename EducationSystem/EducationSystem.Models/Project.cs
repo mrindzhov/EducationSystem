@@ -2,7 +2,7 @@
 using System;
 using EducationSystem.Models.Enums;
 using System.Collections.Generic;
-using EducationSystem.Models.Accounts;
+using EducationSystem.Models.Account;
 
 namespace EducationSystem.Models
 {

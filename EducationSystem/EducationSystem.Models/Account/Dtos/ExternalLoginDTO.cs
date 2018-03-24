@@ -1,4 +1,4 @@
-﻿namespace EducationSystem.Models.Accounts.AccountViews
+﻿namespace EducationSystem.Models.Account.Dtos
 {
     // Models returned by AccountController actions.
 

@@ -1,7 +1,7 @@
 ﻿using EducationSystem.Models.Mappings;
 using System.Collections.Generic;
 
-namespace EducationSystem.Models.Accounts
+namespace EducationSystem.Models.Account
 {
     public class DeveloperAccount
     {

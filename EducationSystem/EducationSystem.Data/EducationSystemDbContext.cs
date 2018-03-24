@@ -1,7 +1,7 @@
 namespace EducationSystem.Data
 {
     using EducationSystem.Models;
-    using EducationSystem.Models.Accounts;
+    using EducationSystem.Models.Account;
     using EducationSystem.Models.Mappings;
     using System.Data.Entity;
 

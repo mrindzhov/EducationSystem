@@ -1,4 +1,4 @@
-﻿using EducationSystem.Models.Accounts;
+﻿using EducationSystem.Models.Account;
 
 namespace EducationSystem.Models.Mappings
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EducationSystem.Models.Accounts.AccountViews
+namespace EducationSystem.Models.Account.Dtos
 {
     public class UserLoginInfoDTO
     {

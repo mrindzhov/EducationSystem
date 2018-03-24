@@ -15,8 +15,8 @@ using Microsoft.Owin.Security.OAuth;
 using EducationSystem.Models;
 using EducationSystem.WebApi.Providers;
 using EducationSystem.WebApi.Results;
-using EducationSystem.Models.Accounts.AccountViews;
-using EducationSystem.Models.Accounts.AccountBindings;
+using EducationSystem.Models.Account.Dtos;
+using EducationSystem.Models.Account.AccountBindings;
 
 namespace EducationSystem.WebApi.Controllers
 {
