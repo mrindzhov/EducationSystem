@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using EducationSystem.Data;
 using EducationSystem.Dtos.Project;
 using EducationSystem.Models;
@@ -14,6 +15,16 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var project = db.Projects.FirstOrDefault(p => p.Id == id);
+
+                return project;
+            }
+        }
+
+        public ICollection<Project> GetByName(string name)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var project = db.Projects.Where(p => p.Name.Contains(name)).ToList();
 
                 return project;
             }
@@ -53,7 +64,7 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects
+                var projects = db.Projects.Include(p => p.SkillsNeeded)
                     .Where(p => p.SkillsNeeded
                                 .Any(s => skillIds.Contains(Convert.ToInt32(s.Type))))
                     .ToList();
@@ -100,6 +111,48 @@ namespace EducationSystem.Services
 
                 db.SaveChanges();
             }
+        }
+
+        public ICollection<ApplicationUser> GetParticipants(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == id);
+            }
+
+            var participants = project.AcceptedDevelopers?.Select(d => d.Account).ToList();
+
+            return participants;
+        }
+
+        public ICollection<ApplicationUser> GetReceivedRequests(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == id);
+            }
+
+            var receivedRequests = project.ReceivedRequests?.Select(d => d.Account).ToList();
+
+            return receivedRequests;
+        }
+
+        public ICollection<ApplicationUser> GetRequestedDevelopers(int id)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == id);
+            }
+
+            var participants = project.RequestedDevelopers?.Select(d => d.Account).ToList();
+
+            return participants;
         }
     }
 }
