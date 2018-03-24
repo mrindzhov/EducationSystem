@@ -1,38 +1,29 @@
 namespace EducationSystem.Data
 {
-    using EducationSystem.Models;
-    using EducationSystem.Models.Account;
-    using EducationSystem.Models.Mappings;
     using System.Data.Entity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using EducationSystem.Models;
+    using EducationSystem.Models.Mappings;
 
-    public class EducationSystemDbContext : DbContext
+    public class EducationSystemDbContext : IdentityDbContext<ApplicationUser>, IEducationSystemDbContext
     {
         public EducationSystemDbContext()
             : base("name=EducationSystemDbContext")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
+
+        public IDbSet<Project> Projects { get; set; }
+        public IDbSet<AcceptedProjectRequest> AcceptedProjectRequests { get; set; }
+        public IDbSet<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
+        public IDbSet<RequestedProjectRequest> RequestedProjectRequests { get; set; }
+        public IDbSet<Feedback> Feedbacks { get; set; }
+        public IDbSet<Resource> Resources { get; set; }
+        public IDbSet<Skill> Skills { get; set; }
 
         public static EducationSystemDbContext Create()
         {
             return new EducationSystemDbContext();
         }
-
-        public DbSet<Project> Projects { get; set; }
-
-        public DbSet<ApplicationUser> Users { get; set; }
-
-        public DbSet<AcceptedProjectRequest> AcceptedProjectRequests { get; set; }
-
-        public DbSet<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
-
-        public DbSet<RequestedProjectRequest> RequestedProjectRequests { get; set; }
-
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
-        public DbSet<Feedback> Feedbacks { get; set; }
-
-        public DbSet<Resource> Resources { get; set; }
-
-        public DbSet<Skill> Skills { get; set; }
     }
 }
