@@ -17,6 +17,10 @@ namespace EducationSystem.Models.Accounts
 
         public string FullName { get; set; }
 
+        public int ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
         public ICollection<Skill> Skills { get; set; }
 
         public ICollection<RequestedProjectRequest> RequestedProjects { get; set; }
