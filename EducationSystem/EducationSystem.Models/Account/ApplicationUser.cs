@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using EducationSystem.Models.Mappings;
+using System.ComponentModel.DataAnnotations;
 
 namespace EducationSystem.Models
 {
@@ -24,8 +25,6 @@ namespace EducationSystem.Models
             // Add custom user claims here
             return userIdentity;
         }
-
-        public string FullName { get; set; }
 
         public ICollection<Skill> Skills { get; set; }
 

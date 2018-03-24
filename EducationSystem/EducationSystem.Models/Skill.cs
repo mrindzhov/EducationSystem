@@ -9,6 +9,9 @@ namespace EducationSystem.Models
         {
             Rank = new HashSet<Feedback>();
         }
+
+        public int Id { get; set; }
+
         public SkillType Type { get; set; }
 
         public ICollection<Feedback> Rank { get; set; }
