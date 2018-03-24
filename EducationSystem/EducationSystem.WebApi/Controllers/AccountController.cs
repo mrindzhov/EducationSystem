@@ -15,8 +15,8 @@ using Microsoft.Owin.Security.OAuth;
 using EducationSystem.Models;
 using EducationSystem.WebApi.Providers;
 using EducationSystem.WebApi.Results;
-using EducationSystem.Models.AccountViews;
-using EducationSystem.Models.AccountBindings;
+using EducationSystem.Models.Accounts.AccountViews;
+using EducationSystem.Models.Accounts.AccountBindings;
 
 namespace EducationSystem.WebApi.Controllers
 {
@@ -55,11 +55,11 @@ namespace EducationSystem.WebApi.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public UserInfoDTO GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            return new UserInfoViewModel
+            return new UserInfoDTO
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
@@ -77,7 +77,7 @@ namespace EducationSystem.WebApi.Controllers
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
-        public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
+        public async Task<ManageInfoDTO> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
@@ -86,11 +86,11 @@ namespace EducationSystem.WebApi.Controllers
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
+            List<UserLoginInfoDTO> logins = new List<UserLoginInfoDTO>();
 
             foreach (IdentityUserLogin linkedAccount in user.Logins)
             {
-                logins.Add(new UserLoginInfoViewModel
+                logins.Add(new UserLoginInfoDTO
                 {
                     LoginProvider = linkedAccount.LoginProvider,
                     ProviderKey = linkedAccount.ProviderKey
@@ -99,14 +99,14 @@ namespace EducationSystem.WebApi.Controllers
 
             if (user.PasswordHash != null)
             {
-                logins.Add(new UserLoginInfoViewModel
+                logins.Add(new UserLoginInfoDTO
                 {
                     LoginProvider = LocalLoginProvider,
                     ProviderKey = user.UserName,
                 });
             }
 
-            return new ManageInfoViewModel
+            return new ManageInfoDTO
             {
                 LocalLoginProvider = LocalLoginProvider,
                 Email = user.UserName,
@@ -117,7 +117,7 @@ namespace EducationSystem.WebApi.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
-        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace EducationSystem.WebApi.Controllers
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        public async Task<IHttpActionResult> SetPassword(SetPasswordDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -156,7 +156,7 @@ namespace EducationSystem.WebApi.Controllers
 
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
-        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
+        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -194,7 +194,7 @@ namespace EducationSystem.WebApi.Controllers
 
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
-        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
+        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -281,10 +281,10 @@ namespace EducationSystem.WebApi.Controllers
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
-        public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
+        public IEnumerable<ExternalLoginDTO> GetExternalLogins(string returnUrl, bool generateState = false)
         {
             IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+            List<ExternalLoginDTO> logins = new List<ExternalLoginDTO>();
 
             string state;
 
@@ -300,7 +300,7 @@ namespace EducationSystem.WebApi.Controllers
 
             foreach (AuthenticationDescription description in descriptions)
             {
-                ExternalLoginViewModel login = new ExternalLoginViewModel
+                ExternalLoginDTO login = new ExternalLoginDTO
                 {
                     Name = description.Caption,
                     Url = Url.Route("ExternalLogin", new
@@ -322,7 +322,7 @@ namespace EducationSystem.WebApi.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -345,7 +345,7 @@ namespace EducationSystem.WebApi.Controllers
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
-        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalDTO model)
         {
             if (!ModelState.IsValid)
             {

@@ -1,6 +1,6 @@
-﻿namespace EducationSystem.Models.AccountViews
+﻿namespace EducationSystem.Models.Accounts.AccountViews
 {
-    public class UserInfoViewModel
+    public class UserInfoDTO
     {
         public string Email { get; set; }
 

@@ -1,8 +1,8 @@
-﻿namespace EducationSystem.Models.AccountViews
+﻿namespace EducationSystem.Models.Accounts.AccountViews
 {
     // Models returned by AccountController actions.
 
-    public class ExternalLoginViewModel
+    public class ExternalLoginDTO
     {
         public string Name { get; set; }
 

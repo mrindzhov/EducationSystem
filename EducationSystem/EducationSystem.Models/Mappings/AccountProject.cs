@@ -1,8 +1,8 @@
 ﻿using EducationSystem.Models.Accounts;
 
-namespace EducationSystem.Models
+namespace EducationSystem.Models.Mappings
 {
-    public class PendingProjectRequest
+    public abstract class AccountProject
     {
         public int ProjectId { get; set; }
 

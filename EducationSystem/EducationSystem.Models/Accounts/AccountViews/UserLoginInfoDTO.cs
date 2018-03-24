@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EducationSystem.Models.AccountViews
+namespace EducationSystem.Models.Accounts.AccountViews
 {
-    public class UserLoginInfoViewModel
+    public class UserLoginInfoDTO
     {
         public string LoginProvider { get; set; }
 

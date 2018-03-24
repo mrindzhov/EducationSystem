@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace EducationSystem.Models.AccountBindings
+namespace EducationSystem.Models.Accounts.AccountBindings
 {
-    public class RegisterBindingModel
+    public class RegisterDTO
     {
         [Required]
         [Display(Name = "Email")]

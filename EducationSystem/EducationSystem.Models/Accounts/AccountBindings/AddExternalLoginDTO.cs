@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace EducationSystem.Models.AccountBindings
+namespace EducationSystem.Models.Accounts.AccountBindings
 {
     // Models used as parameters to AccountController actions.
 
-    public class AddExternalLoginBindingModel
+    public class AddExternalLoginDTO
     {
         [Required]
         [Display(Name = "External access token")]

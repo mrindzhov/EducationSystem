@@ -1,6 +1,6 @@
-﻿namespace EducationSystem.Models
+﻿namespace EducationSystem.Models.Accounts
 {
-    public class AccountRequest
+    public class AccountProject
     {
         public int ProjectId { get; set; }
 
@@ -8,6 +8,6 @@
 
         public Project Project { get; set; }
 
-        public Account Account { get; set; }
+        public DeveloperAccount Account { get; set; }
     }
 }
