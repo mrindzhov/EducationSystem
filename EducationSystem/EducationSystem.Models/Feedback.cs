@@ -6,7 +6,7 @@ namespace EducationSystem.Models
     {
         public int Id { get; set; }
 
-        public FeedbackRank Rank { get; set; }
+        public FeedbackRating Rating { get; set; }
 
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }
