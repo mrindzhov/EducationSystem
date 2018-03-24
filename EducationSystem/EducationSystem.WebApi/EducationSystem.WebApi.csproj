@@ -211,6 +211,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,7 +255,7 @@
       <Name>EducationSystem.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\EducationSystem.Services\EducationSystem.Services.csproj">
-      <Project>{3880555a-747d-4ac4-8290-b5e9e99bd60c}</Project>
+      <Project>{3880555A-747D-4AC4-8290-B5E9E99BD60C}</Project>
       <Name>EducationSystem.Services</Name>
     </ProjectReference>
   </ItemGroup>

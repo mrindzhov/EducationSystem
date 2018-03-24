@@ -7,13 +7,13 @@ namespace EducationSystem.Models
     {
         public Skill()
         {
-            Rank = new HashSet<Feedback>();
+            Feedbacks = new HashSet<Feedback>();
         }
 
         public int Id { get; set; }
 
         public SkillType Type { get; set; }
 
-        public ICollection<Feedback> Rank { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
     }
 }
