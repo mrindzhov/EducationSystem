@@ -1,6 +1,5 @@
 namespace EducationSystem.Data
 {
-    using EducationSystem.Data.Configurations;
     using EducationSystem.Models;
     using EducationSystem.Models.Accounts;
     using EducationSystem.Models.Mappings;
@@ -13,12 +12,17 @@ namespace EducationSystem.Data
         {
         }
 
+        public static EducationSystemDbContext Create()
+        {
+            return new EducationSystemDbContext();
+        }
+
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
 
         public DbSet<CompanyAccount> CompanyAccounts { get; set; }
-        
+
         public DbSet<AcceptedProjectRequest> AcceptedProjectRequests { get; set; }
 
         public DbSet<ReceivedProjectRequest> ReceivedProjectRequests { get; set; }
@@ -32,9 +36,5 @@ namespace EducationSystem.Data
         public DbSet<Resource> Resources { get; set; }
 
         public DbSet<Skill> Skills { get; set; }
-        
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new ProjectConfiguration());
-        }
+    }
 }
