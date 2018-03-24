@@ -75,7 +75,7 @@ namespace EducationSystem.Services
                     Requirements = project.Requirements,
                     SkillsNeeded = project.SkillsNeeded,
                     CreateDate = DateTime.Now,
-                    ProductOwnerId = 1//userId
+                    ProductOwnerId = userId
                 };
 
                 db.Projects.Add(projectModel);
