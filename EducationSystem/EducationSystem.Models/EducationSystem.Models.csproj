@@ -56,8 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\CompanyAccount.cs" />
-    <Compile Include="Account\DeveloperAccount.cs" />
     <Compile Include="Account\Dtos\ChangePasswordDTO.cs" />
     <Compile Include="Account\Dtos\RegisterDTO.cs" />
     <Compile Include="Account\Dtos\RegisterExternalDTO.cs" />

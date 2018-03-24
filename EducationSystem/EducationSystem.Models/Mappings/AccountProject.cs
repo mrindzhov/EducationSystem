@@ -10,6 +10,6 @@ namespace EducationSystem.Models.Mappings
 
         public Project Project { get; set; }
 
-        public DeveloperAccount Account { get; set; }
+        public ApplicationUser Account { get; set; }
     }
 }
