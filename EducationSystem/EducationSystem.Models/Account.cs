@@ -7,10 +7,10 @@ namespace EducationSystem.Models
     {
         public Account()
         {
-            this.Strengths = new HashSet<TechnologyType>();
-            this.ProjectContributing = new HashSet<AccountProject>();
-            this.Requests = new HashSet<AccountRequestProject>();
-            this.Pending = new HashSet<ProjectRequestAccount>();
+            this.Strengths = new HashSet<DeveloperType>();
+            this.Projects = new HashSet<Project>();
+            this.Requests = new HashSet<PendingProjectRequest>();
+            this.Pending = new HashSet<AccountRequest>();
         }
 
         public int AccountId { get; set; }
@@ -19,12 +19,12 @@ namespace EducationSystem.Models
         
         public AccountType AccountType { get; set; }
 
-        public ICollection<TechnologyType> Strengths { get; set; }
+        public ICollection<DeveloperType> Strengths { get; set; }
 
-        public ICollection<AccountProject> ProjectContributing { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
-        public ICollection<AccountRequestProject> Requests { get; set; }
+        public ICollection<PendingProjectRequest> Requests { get; set; }
 
-        public ICollection<ProjectRequestAccount> Pending { get; set; }
+        public ICollection<AccountRequest> Pending { get; set; }
     }
 }
