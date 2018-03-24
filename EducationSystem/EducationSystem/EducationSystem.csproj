@@ -229,9 +229,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EducationSystem.Data\EducationSystem.Data.csproj">
+      <Project>{4FCDAEE2-C93C-42A1-97B2-0FD9C283261C}</Project>
+      <Name>EducationSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EducationSystem.Models\EducationSystem.Models.csproj">
+      <Project>{3908044C-0D88-4813-818D-248BB35EAC46}</Project>
+      <Name>EducationSystem.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
