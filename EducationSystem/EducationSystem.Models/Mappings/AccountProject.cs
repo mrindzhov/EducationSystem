@@ -1,4 +1,4 @@
-﻿using EducationSystem.Models.Accounts;
+﻿using EducationSystem.Models.Account;
 
 namespace EducationSystem.Models.Mappings
 {
@@ -10,6 +10,6 @@ namespace EducationSystem.Models.Mappings
 
         public Project Project { get; set; }
 
-        public DeveloperAccount Account { get; set; }
+        public ApplicationUser Account { get; set; }
     }
 }

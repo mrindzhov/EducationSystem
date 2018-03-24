@@ -1,7 +1,7 @@
 namespace EducationSystem.Data
 {
     using EducationSystem.Models;
-    using EducationSystem.Models.Accounts;
+    using EducationSystem.Models.Account;
     using EducationSystem.Models.Mappings;
     using System.Data.Entity;
 
@@ -19,9 +19,7 @@ namespace EducationSystem.Data
 
         public DbSet<Project> Projects { get; set; }
 
-        public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
-
-        public DbSet<CompanyAccount> CompanyAccounts { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 
         public DbSet<AcceptedProjectRequest> AcceptedProjectRequests { get; set; }
 

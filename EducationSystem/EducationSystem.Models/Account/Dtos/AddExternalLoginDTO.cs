@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace EducationSystem.Models.Accounts.AccountBindings
+namespace EducationSystem.Models.Account.AccountBindings
 {
     // Models used as parameters to AccountController actions.
 
