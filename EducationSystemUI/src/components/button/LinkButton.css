@@ -1,0 +1,21 @@
+.btn:link,
+.btn:visited {
+    margin-right: 10px;
+    display: inline-block;
+    background-color: #1b8b05;
+    color: #fff;
+    padding: 10px 30px;
+    border: 1px solid #1b8b05;
+    border-radius: 200px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    display: inline-block;
+    background-color: #1f9c05;
+    border: 1px solid #1f9c05;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+}

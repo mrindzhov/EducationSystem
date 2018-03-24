@@ -1,6 +1,9 @@
 .header-navigation {
+    padding: 0 60px;
     display: flex;
-    background-color: #e67e22;
+    justify-content: space-between;
+    background-color: #1f9c05;
+    opacity: 0.8;
     height: 50px;
 }
 
@@ -14,9 +17,20 @@
     list-style: none;
     line-height: 50px;
     padding: 0 10px;
+    transition: background-color 0.2s;
+}
+
+.header-navigation ul li i {
+    font-size: 2em;
+}
+
+.header-navigation ul li:hover {
+    background-color: #187b04;
+    cursor: pointer;
 }
 
 .header-navigation ul li a {
     text-decoration: none;
     color: #fff;
+    outline: none;
 }
