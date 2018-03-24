@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EducationSystem.Models.Mappings;
+using System;
 using EducationSystem.Models.Enums;
 using System.Collections.Generic;
 using EducationSystem.Models.Accounts;
@@ -9,11 +10,12 @@ namespace EducationSystem.Models
     {
         public Project()
         {
-            this.Feedbacks = new HashSet<FeedbackRank>();
+            this.Feedbacks = new HashSet<Feedback>();
             this.Resources = new HashSet<Resource>();
-            this.Contributors = new HashSet<DeveloperAccount>();
-            this.Pending = new HashSet<PendingProjectRequest>();
-            this.AccountRequests = new HashSet<AccountRequest>();
+            this.AcceptedDevelopers = new HashSet<AcceptedProjectRequest>();
+            this.RequestedDevelopers = new HashSet<RequestedProjectRequest>();
+            this.ReceivedRequests = new HashSet<ReceivedProjectRequest>();
+            this.SkillsNeeded = new HashSet<Skill>();
         }
 
         public int Id { get; set; }
@@ -32,18 +34,18 @@ namespace EducationSystem.Models
 
         public int ProductOwnerId { get; set; }
 
-        public DeveloperAccount ProductOwner { get; set; } // ApplcationUser
+        public ApplicationUser ProductOwner { get; set; }
 
-        public ICollection<FeedbackRank> Feedbacks { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
 
         public ICollection<Resource> Resources { get; set; }
 
-        public ICollection<SkillType> DeveloperTypesNeeded { get; set; }
+        public ICollection<Skill> SkillsNeeded { get; set; }
 
-        public ICollection<DeveloperAccount> Contributors { get; set; }
+        public ICollection<AcceptedProjectRequest> AcceptedDevelopers { get; set; }
 
-        public ICollection<PendingProjectRequest> Pending { get; set; }
+        public ICollection<RequestedProjectRequest> RequestedDevelopers { get; set; }
 
-        public ICollection<AccountRequest> AccountRequests { get; set; }
+        public ICollection<ReceivedProjectRequest> ReceivedRequests { get; set; }
     }
 }
