@@ -64,6 +64,7 @@
     <Compile Include="Accounts\AccountBindings\RemoveLoginDTO.cs" />
     <Compile Include="Accounts\AccountBindings\SetPasswordDTO.cs" />
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="CreateProjectDTO.cs" />
     <Compile Include="Enums\FeedbackRank.cs" />
     <Compile Include="Mappings\AccountProject.cs" />
     <Compile Include="Mappings\AcceptedProjectRequest.cs" />
