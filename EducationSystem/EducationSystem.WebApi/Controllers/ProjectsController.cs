@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using EducationSystem.Models.Enums;
 using EducationSystem.Data;
+using EducationSystem.Models;
 
 namespace EducationSystem.WebApi.Controllers
 {
@@ -39,6 +40,12 @@ namespace EducationSystem.WebApi.Controllers
         {
             //var technology = (SpkillType)techId;
 
+            return Json("");
+        }
+
+        public IHttpActionResult CreateProject([FromBody])
+        {
+            var project = new Project();
             return Json("");
         }
     }

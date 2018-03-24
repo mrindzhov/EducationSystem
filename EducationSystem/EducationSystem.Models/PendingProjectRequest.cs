@@ -1,4 +1,6 @@
-﻿namespace EducationSystem.Models
+﻿using EducationSystem.Models.Accounts;
+
+namespace EducationSystem.Models
 {
     public class PendingProjectRequest
     {
@@ -8,6 +10,6 @@
 
         public Project Project { get; set; }
 
-        public Account Account { get; set; }
+        public DeveloperAccount Account { get; set; }
     }
 }

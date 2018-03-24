@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace EducationSystem.Models.AccountBindings
+namespace EducationSystem.Models.Accounts.AccountBindings
 {
-    public class SetPasswordBindingModel
+    public class SetPasswordDTO
     {
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

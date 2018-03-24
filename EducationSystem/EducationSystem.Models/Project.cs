@@ -1,6 +1,7 @@
 ﻿using System;
 using EducationSystem.Models.Enums;
 using System.Collections.Generic;
+using EducationSystem.Models.Accounts;
 
 namespace EducationSystem.Models
 {
@@ -10,7 +11,7 @@ namespace EducationSystem.Models
         {
             this.Feedbacks = new HashSet<FeedbackRank>();
             this.Resources = new HashSet<Resource>();
-            this.Contributors = new HashSet<Account>();
+            this.Contributors = new HashSet<DeveloperAccount>();
             this.Pending = new HashSet<PendingProjectRequest>();
             this.AccountRequests = new HashSet<AccountRequest>();
         }
@@ -31,7 +32,7 @@ namespace EducationSystem.Models
 
         public int ProductOwnerId { get; set; }
 
-        public Account ProductOwner { get; set; } // ApplcationUser
+        public DeveloperAccount ProductOwner { get; set; } // ApplcationUser
 
         public ICollection<FeedbackRank> Feedbacks { get; set; }
 
@@ -39,7 +40,7 @@ namespace EducationSystem.Models
 
         public ICollection<SkillType> DeveloperTypesNeeded { get; set; }
 
-        public ICollection<Account> Contributors { get; set; }
+        public ICollection<DeveloperAccount> Contributors { get; set; }
 
         public ICollection<PendingProjectRequest> Pending { get; set; }
 

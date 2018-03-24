@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using EducationSystem.Models.Enums;
 
-namespace EducationSystem.Models
+namespace EducationSystem.Models.Accounts
 {
-    public class Account
+    public class DeveloperAccount
     {
-        public Account()
+        public DeveloperAccount()
         {
             this.Skills = new HashSet<Skill>();
             this.AcceptedProjects = new HashSet<Project>();

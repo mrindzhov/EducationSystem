@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace EducationSystem.Models
+namespace EducationSystem.Models.Accounts
 {
-    public class Company
+    public class CompanyAccount
     {
-        public Company()
+        public CompanyAccount()
         {
             this.PublishedProjects = new HashSet<Project>();
         }
