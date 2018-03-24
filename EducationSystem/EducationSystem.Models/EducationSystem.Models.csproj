@@ -73,6 +73,7 @@
     <Compile Include="Account\Dtos\ManageInfoDTO.cs" />
     <Compile Include="Account\Dtos\UserInfoDTO.cs" />
     <Compile Include="Account\Dtos\UserLoginInfoDTO.cs" />
+    <Compile Include="CreateProjectDTO.cs" />
     <Compile Include="Enums\AccountType.cs" />
     <Compile Include="Enums\LevelType.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />

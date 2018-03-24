@@ -2,44 +2,97 @@
 using EducationSystem.Data;
 using EducationSystem.Models;
 using System.Web.Http.Cors;
+using System.Linq;
+using EducationSystem.Models.Enums;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace EducationSystem.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProjectsController : ApiController
     {
-        private EducationSystemDbContext db = new EducationSystemDbContext();
-
         public IHttpActionResult GetById(int id)
         {
-            //var project = db.Projects.Find(id).FirstOrDefault;
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var project = db.Projects.Find(id);
 
-            return Json("Hello");
+                if (project == null)
+                {
+                    return NotFound();
+                }
+
+                return Json(project);
+            }
         }
 
         public IHttpActionResult GetOpenedProjects()
         {
-            return Json("");
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects.Where(p => p.StartDate == null).ToList();
+
+                if (projects.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Json(projects);
+            }
         }
 
         public IHttpActionResult GetProjectsInProgress()
         {
-            return Json("");
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects.Where(p => p.StartDate != null && p.EndDate == null).ToList();
+
+                if (projects.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Json(projects);
+            }
         }
 
         public IHttpActionResult GetFinishedProjects()
         {
-            return Json("");
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects.Where(p => p.StartDate != null && p.EndDate != null).ToList();
+
+                if (projects.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Json(projects);
+            }
         }
 
-        public IHttpActionResult GetByTechnology(int techId)
+        public IHttpActionResult GetBySkillTypes(List<int> skillIds)
         {
-            //var technology = (SpkillType)techId;
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects
+                    .Where(p => p.SkillsNeeded
+                                .Any(s => skillIds.Contains(Convert.ToInt32(s.Type))))
+                    .ToList();
 
-            return Json("");
+                if (projects.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Json(projects);
+            }
         }
 
-        public IHttpActionResult CreateProject()
+        [HttpPost]
+        public IHttpActionResult Create(CreateProjectDTO proj)
         {
             var project = new Project();
             return Json("");
