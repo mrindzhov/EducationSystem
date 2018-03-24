@@ -72,3 +72,9 @@ export function get() {
         return res.response.json();
     });
 }
+
+export function register(user) {
+    return sendRequest(`${host}api/account/register`, RequestMethod.POST, user).then(res => {
+        return res;
+    });
+}

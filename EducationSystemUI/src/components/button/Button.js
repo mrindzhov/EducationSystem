@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Button.css';
 
 const Button = (props) => (
-  <button href="#" className="btn btn-full">
+  <button className="btn btn-full" {...props}>
     {props.children}
   </button>
 );
