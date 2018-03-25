@@ -5,6 +5,7 @@ using System.Data.Entity;
 using EducationSystem.Data;
 using EducationSystem.Dtos.Project;
 using EducationSystem.Models;
+using EducationSystem.Models.Mappings;
 
 namespace EducationSystem.Services
 {
@@ -125,6 +126,29 @@ namespace EducationSystem.Services
             }
 
             return projects;
+        }
+
+        public void AcceptUser(int projectId, string username)
+        {
+            var project = new Project();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                project = db.Projects.Include(p => p.ReceivedRequests)
+                    .FirstOrDefault(p => p.Id == projectId);
+
+                if (project != null)
+                {
+                    var user = project.ReceivedRequests.
+                        FirstOrDefault(u => u.Account.UserName == username);
+
+                    project.ReceivedRequests.Remove(user);
+                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest()
+                    { AccountId = user.AccountId, ProjectId = user.ProjectId });
+
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

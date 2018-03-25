@@ -117,5 +117,21 @@ namespace EducationSystem.WebApi.Controllers
 
             return Json(projects);
         }
+
+        [HttpPost]
+        public IHttpActionResult AcceptUser(int projectId, string username)
+        {
+            try
+            {
+                var service = new ProjectService();
+                service.AcceptUser(projectId, username);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
