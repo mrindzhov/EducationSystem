@@ -104,5 +104,19 @@ namespace EducationSystem.WebApi.Controllers
                 return NotFound();
             }
         }
+
+        public IHttpActionResult AddSkill(string username, int projectId)
+        {
+            var service = new UserService();
+            try
+            {
+                service.AddSkill(username, projectId);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

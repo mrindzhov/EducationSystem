@@ -90,8 +90,8 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
-                var project = db.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
+                var user = db.Users.Include(x => x.RequestedProjects).FirstOrDefault(x => x.UserName == username);
+                var project = db.Projects.Include(x => x.ReceivedRequests).FirstOrDefault(x => x.Id == projectId);
                 if (user != null && project != null)
                 {
                     var userRequest = new RequestedProjectRequest()
@@ -114,9 +114,20 @@ namespace EducationSystem.Services
             }
         }
 
-        public void AddSkill(int skillNum)
+        public void AddSkill(string username, int skillNum)
         {
-            throw new NotImplementedException();
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == username);
+
+                var skill = new Skill()
+                {
+                    Type = (SkillType)skillNum
+                };
+
+                user.Skills.Add(skill);
+                db.SaveChanges();
+            }
         }
 
         private static List<ApplicationUser> GetUsersWithMatchingRank(int skillType, double minumRank, List<ApplicationUser> usersWithSkill)
