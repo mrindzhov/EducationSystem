@@ -24,26 +24,26 @@ namespace EducationSystem.WebApi.Controllers
             return Json(users);
         }
 
-        public IHttpActionResult GetParticipants(int id)
+        public IHttpActionResult GetParticipants(int projectId)
         {
             var service = new UserService();
-            var participants = service.GetParticipants(id);
+            var participants = service.GetParticipants(projectId);
 
             return Json(participants);
         }
 
-        public IHttpActionResult GetReceivedRequests(int id)
+        public IHttpActionResult GetReceivedRequests(int projectId)
         {
             var service = new UserService();
-            var receivedRequests = service.GetReceivedRequests(id);
+            var receivedRequests = service.GetReceivedRequests(projectId);
 
             return Json(receivedRequests);
         }
 
-        public IHttpActionResult GetRequestedDevelopers(int id)
+        public IHttpActionResult GetRequestedDevelopers(int projectId)
         {
             var service = new UserService();
-            var requestedDevelopers = service.GetRequestedDevelopers(id);
+            var requestedDevelopers = service.GetRequestedDevelopers(projectId);
 
             return Json(requestedDevelopers);
         }
