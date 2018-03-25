@@ -210,9 +210,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +253,10 @@
     <ProjectReference Include="..\EducationSystem.Models\EducationSystem.Models.csproj">
       <Project>{3908044c-0d88-4813-818d-248bb35eac46}</Project>
       <Name>EducationSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EducationSystem.Services\EducationSystem.Services.csproj">
+      <Project>{3880555A-747D-4AC4-8290-B5E9E99BD60C}</Project>
+      <Name>EducationSystem.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

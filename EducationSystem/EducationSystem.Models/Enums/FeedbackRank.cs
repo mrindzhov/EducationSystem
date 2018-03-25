@@ -1,6 +1,6 @@
 ﻿namespace EducationSystem.Models.Enums
 {
-    public enum FeedbackRank
+    public enum FeedbackRating
     {
         Poor = 2,
         Bad = 3,
