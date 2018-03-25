@@ -24,14 +24,6 @@ namespace EducationSystem.WebApi.Controllers
             return Json(project);
         }
 
-        public IHttpActionResult GetAllNotOwnedByUser(string email)
-        {
-            var service = new ProjectService();
-            var projects = service.GetAll(email);
-
-            return Json(projects);
-        }
-
         public IHttpActionResult GetAllOpen()
         {
             var service = new ProjectService();
@@ -52,6 +44,46 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetFinishedProjects();
+
+            return Json(projects);
+        }
+
+        public IHttpActionResult GetAllCreatedByUser(string username)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAllCreatedByUser(username);
+
+            return Json(projects);
+        }
+
+        public IHttpActionResult GetAllAcceptedByUser(string username)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAllAcceptedByUser(username);
+
+            return Json(projects);
+        }
+
+        public IHttpActionResult GetAllReceivedByUser(string username)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAllReceivedByUser(username);
+
+            return Json(projects);
+        }
+
+        public IHttpActionResult GetAllRequestedByUser(string username)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAllRequestedByUser(username);
+
+            return Json(projects);
+        }
+
+        public IHttpActionResult GetAllNotOwnedByUser(string email)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAll(email);
 
             return Json(projects);
         }
@@ -99,14 +131,6 @@ namespace EducationSystem.WebApi.Controllers
                 var message = e.Message;
                 return BadRequest();
             }
-        }
-
-        public IHttpActionResult GetAllByUser(string username)
-        {
-            var service = new ProjectService();
-            var projects = service.GetUserProjects(username);
-
-            return Json(projects);
         }
 
         [HttpPost]

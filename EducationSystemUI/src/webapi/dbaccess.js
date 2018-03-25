@@ -36,17 +36,17 @@ async function sendRequest(endpoint, method, postObj = null, captchaToken = null
     let requestHeaders = {};
 
     switch (method) {
-    case RequestMethod.GET:
-        requestHeaders = getParams;
-        break;
-    case RequestMethod.POST:
-        requestHeaders = postParams;
-        break;
-    case RequestMethod.DELETE:
-        requestHeaders = deleteParams;
-        break;
-    default:
-        break;
+        case RequestMethod.GET:
+            requestHeaders = getParams;
+            break;
+        case RequestMethod.POST:
+            requestHeaders = postParams;
+            break;
+        case RequestMethod.DELETE:
+            requestHeaders = deleteParams;
+            break;
+        default:
+            break;
     }
 
     return fetch(endpoint, requestHeaders)
@@ -78,8 +78,8 @@ export function register(user) {
             'Content-Type': 'application/json'
         })
     }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
 }
 
 export function login(user) {
@@ -95,6 +95,45 @@ export function login(user) {
             withCredentials: true
         }
     }).then(res => { return res.json() });
+}
+
+export function getCreatedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllCreatedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+}
+
+export function getRequestedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllRequestedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+}
+
+export function getAcceptedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllAcceptedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
 }
 
 export function getAllProjects(userEmail) {

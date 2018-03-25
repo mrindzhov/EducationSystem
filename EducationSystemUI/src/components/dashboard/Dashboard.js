@@ -2,58 +2,51 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderNavigation from '../navbar/HeaderNavigation';
 import './Dashboard.css';
+import Project from '../projects/Project'
+import { getCreatedProjectsByUser, getRequestedProjectsByUser, getAcceptedProjectsByUser } from '../../webapi/dbaccess'
 
 import LinkButton from '../button/LinkButton';
 
-const projects = [
-  {
-      "Id": 1,
-      "Name": null,
-      "CreateDate": "2018-03-25T10:44:46.613",
-      "GitHubUrl": null,
-      "StartDate": null,
-      "EndDate": null,
-      "EstimationDate": null,
-      "Description": null,
-      "Requirements": null,
-      "IsTeamFormed": false,
-      "ProductOwnerId": null,
-      "ProductOwner": null,
-      "Feedbacks": [],
-      "Resources": [],
-      "SkillsNeeded": [],
-      "AcceptedDevelopers": [],
-      "RequestedDevelopers": [],
-      "ReceivedRequests": []
-  },
-  {
-      "Id": 2,
-      "Name": null,
-      "CreateDate": "2018-03-25T10:45:31.76",
-      "GitHubUrl": null,
-      "StartDate": null,
-      "EndDate": null,
-      "EstimationDate": null,
-      "Description": null,
-      "Requirements": null,
-      "IsTeamFormed": false,
-      "ProductOwnerId": null,
-      "ProductOwner": null,
-      "Feedbacks": [],
-      "Resources": [],
-      "SkillsNeeded": [],
-      "AcceptedDevelopers": [],
-      "RequestedDevelopers": [],
-      "ReceivedRequests": []
-  }
-]
+const createdProjects = getCreatedProjectsByUser("kukamunga@kuka.munga")
+const involvedProjects = getAcceptedProjectsByUser("kukamunga@kuka.munga")
+const requestedProjects = getRequestedProjectsByUser("kukamunga@kuka.munga")
 
 const Dashboard = () => (
   <section className="section-dashboard">
     <h2>Dashboard</h2>
-    <div className="row">
-      <LinkButton to="/dashboard/create">Create New</LinkButton>
-    </div>
+    <section>
+      <div>
+        <h3>Created Projects</h3>
+        <div className="row">
+          <LinkButton to="/dashboard/create">Create New</LinkButton>
+        </div>
+        {createdProjects ? createdProjects.map(project => {
+          return (
+            <Project />
+          );
+        }) : <div>(empty)</div>
+        }
+      </div>
+      <div>
+        <h3>Involved Projects</h3>
+        {involvedProjects ? involvedProjects.map(project => {
+          return (
+            <Project />
+          );
+        }) : <div>(empty)</div>
+        }
+      </div>
+      <div>
+        <h3>Requested Projects</h3>
+        {requestedProjects ? requestedProjects.map(project => {
+          return (
+            <Project />
+          );
+        }) : <div>(empty)</div>
+        }
+      </div>
+
+    </section >
   </section>
 );
 
