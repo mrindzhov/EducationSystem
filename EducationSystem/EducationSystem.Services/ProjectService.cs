@@ -150,20 +150,6 @@ namespace EducationSystem.Services
             }
         }
 
-        private static Project GenerateModel(string userId, CreateProjectDTO projectDto)
-        {
-            return new Project
-            {
-                Name = projectDto.Name,
-                GitHubUrl = projectDto.GitHubUrl,
-                Description = projectDto.Description,
-                Requirements = projectDto.Requirements,
-                SkillsNeeded = projectDto.SkillsNeeded,
-                CreateDate = DateTime.Now,
-                ProductOwnerId = userId
-            };
-        }
-
         public void Edit(ProjectFilter filter)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -197,23 +183,38 @@ namespace EducationSystem.Services
 
                 if (project != null)
                 {
-                    var receivedRequest = project.ReceivedRequests.
+                    var receivedRequest = project.ReceivedRequests.Where(u => u.Account != null).
                         FirstOrDefault(u => u.Account.UserName == username);
 
-                    project.ReceivedRequests.Remove(receivedRequest);
-                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest
-                    { AccountId = receivedRequest.AccountId, ProjectId = receivedRequest.ProjectId });
+                    var receivedRequestForDelete = db.Entry(receivedRequest);
+                    receivedRequestForDelete.State = EntityState.Deleted;
 
                     var requestedProject = user.RequestedProjects.
                         FirstOrDefault(u => u.ProjectId == projectId);
 
-                    user.RequestedProjects.Remove(requestedProject);
+                    var requestedProjectForDelete = db.Entry(requestedProject);
+                    requestedProjectForDelete.State = EntityState.Deleted;
+
                     user.AcceptedProjects.Add(new AcceptedProjectRequest
                     { AccountId = requestedProject.AccountId, ProjectId = requestedProject.ProjectId });
 
                     db.SaveChanges();
                 }
             }
+        }
+
+        private static Project GenerateModel(string userId, CreateProjectDTO projectDto)
+        {
+            return new Project
+            {
+                Name = projectDto.Name,
+                GitHubUrl = projectDto.GitHubUrl,
+                Description = projectDto.Description,
+                Requirements = projectDto.Requirements,
+                SkillsNeeded = projectDto.SkillsNeeded,
+                CreateDate = DateTime.Now,
+                ProductOwnerId = userId
+            };
         }
     }
 }
