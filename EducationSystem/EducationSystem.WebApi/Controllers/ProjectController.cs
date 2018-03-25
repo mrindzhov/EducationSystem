@@ -36,11 +36,6 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetOpenedProjects();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
@@ -48,11 +43,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetProjectsInProgress();
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
@@ -62,11 +52,6 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetFinishedProjects();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
@@ -75,23 +60,16 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetBySkillTypes(skillIds);
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateProjectDTO project)
+        public IHttpActionResult Create(CreateProjectDTO project, string userEmail)
         {
             try
             {
-                var userId = User.Identity.GetUserId();
-                var testId = "1a20ab71-bb95-4dea-ba13-08f89eafcec8";
                 var service = new ProjectService();
-                service.Create(testId, project);
+                service.Create(userEmail, project);
 
                 return Ok();
             }
@@ -124,11 +102,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetUserProjects(username);
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
