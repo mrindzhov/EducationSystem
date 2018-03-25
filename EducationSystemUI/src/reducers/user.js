@@ -11,6 +11,7 @@ export default (state = userReducerDefaultState, action) => {
       return {
         ...state,
         isLogged: action.isLogged,
+        email: action.email
       };
     case 'SET_USER_TOKEN':
       return {

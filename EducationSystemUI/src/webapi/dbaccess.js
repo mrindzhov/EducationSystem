@@ -96,3 +96,16 @@ export function login(user) {
         }
     }).then(res => { return res.json() });
 }
+
+export function getAllProjects(userEmail) {
+    const search = userEmail ? `?email=${userEmail}` : ``;
+    var url = `${host}api/project/getAll${search}`;
+    var data = userEmail;
+    console.log(data);
+    return fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => { return res.json() });
+}
