@@ -14,9 +14,9 @@
 }
 
 .header-navigation ul li {
+    text-align: center;
     list-style: none;
     line-height: 50px;
-    padding: 0 10px;
     transition: background-color 0.2s;
 }
 
@@ -30,7 +30,15 @@
 }
 
 .header-navigation ul li a {
+    display: inline-block;
+    padding: 0 10px;
     text-decoration: none;
     color: #fff;
     outline: none;
+    height: 47px;
+    line-height: 50px;
+}
+
+.active {
+    border-bottom: 3px solid #de7519;
 }

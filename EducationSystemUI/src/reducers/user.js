@@ -1,14 +1,22 @@
 const userReducerDefaultState = {
-  isLogged: false
+  isLogged: false,
+  userToken: ''
 };
 
 export default (state = userReducerDefaultState, action) => {
+  
+  console.log(action)
   switch (action.type) {
     case 'SET_IS_LOGGED':
-      return [
+      return {
         ...state,
-        action.isLogged
-      ];
+        isLogged: action.isLogged,
+      };
+    case 'SET_USER_TOKEN':
+      return {
+        ...state,
+        userToken: action.userToken,
+      };
     default:
       return state;
   }
