@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using EducationSystem.Data;
 using EducationSystem.Models;
+using EducationSystem.Models.Enums;
 
 namespace EducationSystem.Services
 {
@@ -38,9 +39,21 @@ namespace EducationSystem.Services
             }
         }
 
-        public void RateUserByProject(string id)
+        public void RateUserByItsProject(int projectId, string username, int rate, string comment)
         {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.FirstOrDefault(x => x.UserName == username);
+                var feedback = new Feedback()
+                {
+                    UserId = user.Id,
+                    Comment = comment,
+                    Rating = (FeedbackRating)rate
+                };
 
+                var project = db.Projects.Include(x=>x.Feedbacks).FirstOrDefault(x => x.Id == projectId);
+                project.Feedbacks.Add(feedback);
+            }
         }
     }
 }

@@ -1,9 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import HeaderNavigation from '../navbar/HeaderNavigation';
 import './HomePage.css';
-
-import Button from '../button/Button';
 
 const HomePage = () => (
   <div>

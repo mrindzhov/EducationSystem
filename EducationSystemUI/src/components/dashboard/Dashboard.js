@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import HeaderNavigation from '../navbar/HeaderNavigation';
 import './Dashboard.css';
 import Project from '../projects/Project'
 import { getCreatedProjectsByUser, getRequestedProjectsByUser, getAcceptedProjectsByUser } from '../../webapi/dbaccess'

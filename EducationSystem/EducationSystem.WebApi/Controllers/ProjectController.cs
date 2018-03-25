@@ -97,14 +97,12 @@ namespace EducationSystem.WebApi.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateProjectDTO project)
+        public IHttpActionResult Create(CreateProjectDTO project, string userEmail)
         {
             try
             {
-                var userId = User.Identity.GetUserId();
-                var testId = "1a20ab71-bb95-4dea-ba13-08f89eafcec8";
                 var service = new ProjectService();
-                service.Create(testId, project);
+                service.Create(userEmail, project);
 
                 return Ok();
             }

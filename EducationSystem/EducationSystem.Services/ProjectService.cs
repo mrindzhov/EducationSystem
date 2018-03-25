@@ -134,7 +134,7 @@ namespace EducationSystem.Services
             }
         }
 
-        public void Create(string userId, CreateProjectDTO projectDto)
+        public void Create(string userEmail, CreateProjectDTO project)
         {
             //Not tested for correct userId
             Project project = GenerateModel(userId, projectDto);

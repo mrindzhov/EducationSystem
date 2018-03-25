@@ -14,5 +14,35 @@ namespace EducationSystem.WebApi.Controllers
 
             return Json(feedback);
         }
+
+        public IHttpActionResult GetByUser(string userName)
+        {
+            var service = new FeedbackService();
+            var feedback = service.GetByUser(userName);
+
+            return Json(feedback);
+        }
+
+        public IHttpActionResult GetByProject(int projectId)
+        {
+            var service = new FeedbackService();
+            var feedback = service.GetByProject(projectId);
+
+            return Json(feedback);
+        }
+
+        public IHttpActionResult RateUserByItsProject(int projectId, string username, int rate, string comment)
+        {
+            var service = new FeedbackService();
+            try
+            {
+                service.RateUserByItsProject(projectId, username, rate, comment);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

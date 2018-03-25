@@ -1,8 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import HeaderNavigation from '../navbar/HeaderNavigation';
-
-import LinkButton from '../button/LinkButton';
 
 const project =  {
     "Id": 4,
