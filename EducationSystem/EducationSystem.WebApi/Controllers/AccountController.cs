@@ -16,11 +16,13 @@ using EducationSystem.Models;
 using EducationSystem.WebApi.Providers;
 using EducationSystem.WebApi.Results;
 using EducationSystem.Dtos.Account;
+using System.Web.Http.Cors;
 
 namespace EducationSystem.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
