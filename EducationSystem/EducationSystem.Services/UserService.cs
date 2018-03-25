@@ -1,6 +1,7 @@
 ﻿using EducationSystem.Data;
 using EducationSystem.Models;
 using EducationSystem.Models.Enums;
+using EducationSystem.Models.Mappings;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -100,6 +101,49 @@ namespace EducationSystem.Services
             }
 
             return targetUsers;
+        }
+
+        public void AcceptProject(int projectId, string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+
+                if (user != null)
+                {
+
+                    var request = user.ReceivedProjectRequests
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+
+                    user.ReceivedProjectRequests.Remove(request);
+
+                    user.AcceptedProjects.Add(new AcceptedProjectRequest()
+                    {
+                        AccountId = request.AccountId,
+                        ProjectId = request.ProjectId
+                    });
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void DeclineProject(int projectId, string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+
+                if (user != null)
+                {
+                    var request = user.ReceivedProjectRequests
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+
+                    user.ReceivedProjectRequests.Remove(request);
+
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

@@ -143,7 +143,7 @@ namespace EducationSystem.Services
                         FirstOrDefault(u => u.Account.UserName == username);
 
                     project.ReceivedRequests.Remove(user);
-                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest()
+                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest
                     { AccountId = user.AccountId, ProjectId = user.ProjectId });
 
                     db.SaveChanges();

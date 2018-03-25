@@ -5,8 +5,8 @@ using EducationSystem.Services;
 namespace EducationSystem.WebApi.Controllers
 {
     [Authorize]
-    [EnableCors("*", "*", "*")]
-    public class UsersController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class UserController : ApiController
     {
         public IHttpActionResult GetByUsername(string username)
         {
@@ -46,6 +46,18 @@ namespace EducationSystem.WebApi.Controllers
             var requestedDevelopers = service.GetRequestedDevelopers(projectId);
 
             return Json(requestedDevelopers);
+        }
+
+        public void AcceptProject(int projectId, string username)
+        {
+            var service = new UserService();
+            service.AcceptProject(projectId, username);
+        }
+
+        public void DeclineProject(int projectId, string username)
+        {
+            var service = new UserService();
+            service.AcceptProject(projectId, username);
         }
     }
 }
