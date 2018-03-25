@@ -17,6 +17,7 @@ using EducationSystem.Models;
 using EducationSystem.WebApi.Providers;
 using EducationSystem.WebApi.Results;
 using EducationSystem.Dtos.Account;
+using System.Web.Http.Cors;
 
 namespace EducationSystem.WebApi.Controllers
 {

@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import HeaderNavigation from '../navbar/HeaderNavigation';
 import './Projects.css';
 
-import Button from '../button/Button';
+const create = () => {
+
+}
 
 const Projects = () => (
   <section className="section-projects">
     <h2>Projects</h2>
+
   </section>
 );
 

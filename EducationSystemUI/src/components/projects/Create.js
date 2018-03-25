@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderNavigation from '../navbar/HeaderNavigation';
-import './Dashboard.css';
+import './Create.css';
 
 import LinkButton from '../button/LinkButton';
 
-const Dashboard = () => (
-  <section className="section-dashboard">
-    <h2>Dashboard</h2>
+const Create = () => (
+  <section className="section-create">
+    <h2>Create</h2>
     <div className="row">
-      <LinkButton to="/dashboard/create">Create New</LinkButton>
     </div>
   </section>
 );
 
-export default Dashboard;
+export default Create;

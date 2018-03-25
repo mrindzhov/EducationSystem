@@ -8,7 +8,7 @@ import Button from '../button/Button';
 const HomePage = () => (
   <div>
     <header className="home-header">
-      <div class="hero-box">
+      <div className="hero-box">
         <h1>Teamwork Education</h1>
       </div>
     </header>

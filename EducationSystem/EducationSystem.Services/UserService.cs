@@ -1,6 +1,7 @@
 ﻿using EducationSystem.Data;
 using EducationSystem.Models;
 using EducationSystem.Models.Enums;
+using EducationSystem.Models.Mappings;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -34,13 +35,13 @@ namespace EducationSystem.Services
             return targetUsers;
         }
 
-        public ICollection<ApplicationUser> GetParticipants(int id)
+        public ICollection<ApplicationUser> GetParticipants(int projectId)
         {
             var project = new Project();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == id);
+                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == projectId);
             }
 
             var participants = project.AcceptedDevelopers?.Select(d => d.Account).ToList();
@@ -48,13 +49,13 @@ namespace EducationSystem.Services
             return participants;
         }
 
-        public ICollection<ApplicationUser> GetReceivedRequests(int id)
+        public ICollection<ApplicationUser> GetReceivedRequests(int projectId)
         {
             var project = new Project();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == id);
+                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == projectId);
             }
 
             var receivedRequests = project.ReceivedRequests?.Select(d => d.Account).ToList();
@@ -62,13 +63,13 @@ namespace EducationSystem.Services
             return receivedRequests;
         }
 
-        public ICollection<ApplicationUser> GetRequestedDevelopers(int id)
+        public ICollection<ApplicationUser> GetRequestedDevelopers(int projectId)
         {
             var project = new Project();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == id);
+                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == projectId);
             }
 
             var participants = project.RequestedDevelopers?.Select(d => d.Account).ToList();
@@ -100,6 +101,49 @@ namespace EducationSystem.Services
             }
 
             return targetUsers;
+        }
+
+        public void AcceptProject(int projectId, string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+
+                if (user != null)
+                {
+
+                    var request = user.ReceivedProjectRequests
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+
+                    user.ReceivedProjectRequests.Remove(request);
+
+                    user.AcceptedProjects.Add(new AcceptedProjectRequest()
+                    {
+                        AccountId = request.AccountId,
+                        ProjectId = request.ProjectId
+                    });
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void DeclineProject(int projectId, string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+
+                if (user != null)
+                {
+                    var request = user.ReceivedProjectRequests
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+
+                    user.ReceivedProjectRequests.Remove(request);
+
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }
