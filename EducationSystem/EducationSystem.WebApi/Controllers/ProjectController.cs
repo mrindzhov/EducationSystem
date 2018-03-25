@@ -24,10 +24,10 @@ namespace EducationSystem.WebApi.Controllers
             return Json(project);
         }
 
-        public IHttpActionResult GetAll()
+        public IHttpActionResult GetAll(string userId)
         {
             var service = new ProjectService();
-            var projects = service.GetAll();
+            var projects = service.GetAll(userId);
 
             if (projects.Count == 0)
             {

@@ -31,11 +31,11 @@ namespace EducationSystem.Services
             }
         }
 
-        public ICollection<Project> GetAll()
+        public ICollection<Project> GetAll(string userId)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.ToArray();
+                var projects = db.Projects.Where(p => p.ProductOwnerId != userId).ToArray();
 
                 return projects;
             }
@@ -141,20 +141,30 @@ namespace EducationSystem.Services
         public void AcceptUser(int projectId, string username)
         {
             var project = new Project();
+            var user = new ApplicationUser();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 project = db.Projects.Include(p => p.ReceivedRequests)
                     .FirstOrDefault(p => p.Id == projectId);
+                user = db.Users.Include(u => u.RequestedProjects)
+                    .FirstOrDefault(u => u.UserName == username);
 
                 if (project != null)
                 {
-                    var user = project.ReceivedRequests.
+                    var receivedRequest = project.ReceivedRequests.
                         FirstOrDefault(u => u.Account.UserName == username);
 
-                    project.ReceivedRequests.Remove(user);
+                    project.ReceivedRequests.Remove(receivedRequest);
                     project.AcceptedDevelopers.Add(new AcceptedProjectRequest
-                    { AccountId = user.AccountId, ProjectId = user.ProjectId });
+                    { AccountId = receivedRequest.AccountId, ProjectId = receivedRequest.ProjectId });
+
+                    var requestedProject = user.RequestedProjects.
+                        FirstOrDefault(u => u.ProjectId == projectId);
+
+                    user.RequestedProjects.Remove(requestedProject);
+                    user.AcceptedProjects.Add(new AcceptedProjectRequest
+                    { AccountId = requestedProject.AccountId, ProjectId = requestedProject.ProjectId });
 
                     db.SaveChanges();
                 }
