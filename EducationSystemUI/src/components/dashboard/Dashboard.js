@@ -2,15 +2,56 @@ import React from 'react';
 import './Dashboard.css';
 import Project from '../projects/Project'
 import { getCreatedProjectsByUser, getRequestedProjectsByUser, getAcceptedProjectsByUser } from '../../webapi/dbaccess'
+import { connect } from 'react-redux';
 
 import LinkButton from '../button/LinkButton';
 
-const createdProjects = getCreatedProjectsByUser("kukamunga@kuka.munga")
-const involvedProjects = getAcceptedProjectsByUser("kukamunga@kuka.munga")
-const requestedProjects = getRequestedProjectsByUser("kukamunga@kuka.munga")
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      createdProjects: [],
+      involvedProjects: [],
+      requestedProjects: [],
+    }
 
-const Dashboard = () => (
-  <section className="section-dashboard">
+    this.getCreatedProjectsByUser = this.getCreatedProjectsByUser.bind(this);
+    this.getAcceptedProjectsByUser = this.getAcceptedProjectsByUser.bind(this);
+    this.getRequestedProjectsByUser = this.getRequestedProjectsByUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCreatedProjectsByUser();
+    this.getAcceptedProjectsByUser();
+    this.getRequestedProjectsByUser();
+  }
+
+  getCreatedProjectsByUser() {
+    getCreatedProjectsByUser(this.props.user.email).then(json => {
+      console.log(json);
+      this.setState({ createdProjects: json });
+    })
+  }
+
+  getAcceptedProjectsByUser() {
+    getAcceptedProjectsByUser(this.props.user.email).then(json => {
+      console.log(json);
+      this.setState({ involvedProjects: json });
+    })
+  }
+
+  getRequestedProjectsByUser() {
+    getRequestedProjectsByUser(this.props.user.email).then(json => {
+      console.log(json);
+      this.setState({ requestedProjects: json });
+    })
+  }
+
+
+  render() {
+    return (
+      <section className="section-dashboard">
     <h2>Dashboard</h2>
     <section>
       <div>
@@ -18,27 +59,27 @@ const Dashboard = () => (
         <div className="row">
           <LinkButton to="/dashboard/create">Create New</LinkButton>
         </div>
-        {createdProjects ? createdProjects.map(project => {
+        {this.state.createdProjects ? this.state.createdProjects.map(project => {
           return (
-            <Project />
+            <Project project={project} />
           );
         }) : <div>(empty)</div>
         }
       </div>
       <div>
         <h3>Involved Projects</h3>
-        {involvedProjects ? involvedProjects.map(project => {
+        {this.state.involvedProjects ? this.state.involvedProjects.map(project => {
           return (
-            <Project />
+            <Project project={project} />
           );
         }) : <div>(empty)</div>
         }
       </div>
       <div>
         <h3>Requested Projects</h3>
-        {requestedProjects ? requestedProjects.map(project => {
+        {this.state.requestedProjects ? this.state.requestedProjects.map(project => {
           return (
-            <Project />
+            <Project project={project} />
           );
         }) : <div>(empty)</div>
         }
@@ -46,6 +87,14 @@ const Dashboard = () => (
 
     </section >
   </section>
-);
+    )
+  }
+}
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

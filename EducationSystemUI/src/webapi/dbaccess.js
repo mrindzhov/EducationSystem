@@ -33,40 +33,37 @@ export function login(user) {
 export function getCreatedProjectsByUser(username) {
     var url = `${host}api/project/GetAllCreatedByUser?username=${username}`;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'
         })
     }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .catch(error => console.error('Error:', error));
 }
 
 export function getRequestedProjectsByUser(username) {
     var url = `${host}api/project/GetAllRequestedByUser?username=${username}`;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'
         })
     }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .catch(error => console.error('Error:', error));
 }
 
 export function getAcceptedProjectsByUser(username) {
     var url = `${host}api/project/GetAllAcceptedByUser?username=${username}`;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'
         })
     }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .catch(error => console.error('Error:', error));
 }
 
 export function getAllProjects(userEmail) {
@@ -87,9 +84,9 @@ export function createProject(project) {
     var data = project;
     return fetch(url, {
         method: 'POST',
-        body: data,
+        body: JSON.stringify(data),
         headers: new Headers({
             'Content-Type': 'application/json'
         })
-    }).then(res => { return res.json() });
+    }).then(res => res);
 }
