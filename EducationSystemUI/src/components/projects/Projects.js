@@ -46,7 +46,7 @@ const projects = [
     "ReceivedRequests": []
 },
 {
-  "Id": 1,
+  "Id": 3,
   "Name": "First",
   "CreateDate": "2018-03-25T10:44:46.613",
   "GitHubUrl": null,
@@ -66,7 +66,7 @@ const projects = [
   "ReceivedRequests": []
 },
   {
-      "Id": 2,
+      "Id": 4,
       "Name": "Second",
       "CreateDate": "2018-03-25T10:45:31.76",
       "GitHubUrl": null,
@@ -94,7 +94,7 @@ const Projects = () => (
       
       {projects && projects.map(project => {
         return (
-          <Project />
+          <Project project={project}/>
         );
       })}
     </div>
