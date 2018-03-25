@@ -47,5 +47,17 @@ namespace EducationSystem.WebApi.Controllers
 
             return Json(requestedDevelopers);
         }
+
+        public void AcceptProject(int projectId, string username)
+        {
+            var service = new UserService();
+            service.AcceptProject(projectId, username);
+        }
+
+        public void DeclineProject(int projectId, string username)
+        {
+            var service = new UserService();
+            service.AcceptProject(projectId, username);
+        }
     }
 }
