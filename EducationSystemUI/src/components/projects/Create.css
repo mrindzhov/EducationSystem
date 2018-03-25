@@ -3,3 +3,11 @@ section {
     padding: 20px;
     margin: 50px auto;
 }
+
+.form-row {
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    min-width: 200px;
+}

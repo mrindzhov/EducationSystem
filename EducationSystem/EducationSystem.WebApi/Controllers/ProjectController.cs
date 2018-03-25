@@ -28,7 +28,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetAll(email);
-
             return Json(projects);
         }
 
