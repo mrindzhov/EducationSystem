@@ -144,7 +144,8 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var userId = db.Users.FirstOrDefault(u => u.Email == projectDto.UserEmail).Id;
-                Project project = GenerateModel(userId, projectDto);
+                var project = GenerateModel(userId, projectDto);
+
                 db.Projects.Add(project);
                 db.SaveChanges();
             }
