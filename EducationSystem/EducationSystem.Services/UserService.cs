@@ -22,6 +22,15 @@ namespace EducationSystem.Services
             }
         }
 
+        public string GetIdByUsername(string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.FirstOrDefault(x => x.UserName == username);
+                return user.Id;
+            }
+        }
+
         public ICollection<ApplicationUser> GetAllUsersBySkill(int skillType, double minumRank = 2)
         {
             var usersWithSkill = new List<ApplicationUser>();
@@ -77,6 +86,50 @@ namespace EducationSystem.Services
             return participants;
         }
 
+        public void SendRequestToProject(string username, int projectId)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.RequestedProjects).FirstOrDefault(x => x.UserName == username);
+                var project = db.Projects.Include(x => x.ReceivedRequests).FirstOrDefault(x => x.Id == projectId);
+                if (user != null && project != null)
+                {
+                    var userRequest = new RequestedProjectRequest()
+                    {
+                        AccountId =user.Id,
+                        ProjectId = projectId
+                    };
+
+                    var projectRequest = new ReceivedProjectRequest()
+                    {
+                        ProjectId = projectId,
+                        AccountId = user.Id
+                    };
+
+                    user.RequestedProjects.Add(userRequest);
+                    project.ReceivedRequests.Remove(projectRequest);
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void AddSkill(string username, int skillNum)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var user = db.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == username);
+
+                var skill = new Skill()
+                {
+                    Type = (SkillType)skillNum
+                };
+
+                user.Skills.Add(skill);
+                db.SaveChanges();
+            }
+        }
+
         private static List<ApplicationUser> GetUsersWithMatchingRank(int skillType, double minumRank, List<ApplicationUser> usersWithSkill)
         {
             var targetUsers = new List<ApplicationUser>();
@@ -108,19 +161,28 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
-
-                if (user != null)
+                var project = db.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
+                if (user != null && project!=null)
                 {
-
-                    var request = user.ReceivedProjectRequests
+                    var userRequest = user.ReceivedProjectRequests
                         .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
 
-                    user.ReceivedProjectRequests.Remove(request);
+                    var projectRequest = project.RequestedDevelopers
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+
+                    user.ReceivedProjectRequests.Remove(userRequest);
+                    project.RequestedDevelopers.Remove(projectRequest);
 
                     user.AcceptedProjects.Add(new AcceptedProjectRequest()
                     {
-                        AccountId = request.AccountId,
-                        ProjectId = request.ProjectId
+                        AccountId = userRequest.AccountId,
+                        ProjectId = userRequest.ProjectId
+                    });
+
+                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest()
+                    {
+                        AccountId = projectRequest.AccountId,
+                        ProjectId = projectRequest.ProjectId
                     });
 
                     db.SaveChanges();
@@ -133,13 +195,17 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+                var project = db.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
 
                 if (user != null)
                 {
-                    var request = user.ReceivedProjectRequests
+                    var userRequest = user.ReceivedProjectRequests
+                        .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
+                    var projectRequest = project.RequestedDevelopers
                         .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
 
-                    user.ReceivedProjectRequests.Remove(request);
+                    user.ReceivedProjectRequests.Remove(userRequest);
+                    project.RequestedDevelopers.Remove(projectRequest);
 
                     db.SaveChanges();
                 }

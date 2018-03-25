@@ -1,19 +1,17 @@
-.btn,
-.btn {
-    margin-right: 10px;
+.btn-modal,
+.btn-modal {
     display: inline-block;
-    background-color: #1f9c0542;
-    color: rgb(110, 110, 110);
-    padding: 3px 15px;
-    border: 1px solid #d9ffd242;
-    border-radius: 1px;
+    background-color: #1b8b05;
+    color: #fff;
+    padding: 10px 30px;
+    border: 1px solid #1b8b05;
+    border-radius: 2px;
     text-decoration: none;
     transition: background-color 0.2s;
     outline: none;
-    font-size: 70%;
 }
 
-.btn:hover {
+.btn-modal:hover {
     display: inline-block;
     background-color: #1f9c05;
     border: 1px solid #1f9c05;

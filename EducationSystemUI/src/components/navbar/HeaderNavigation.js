@@ -64,6 +64,7 @@ class HeaderNavigation extends React.Component {
     onLogout() {
         this.props.dispatch(setIsLogged());
         this.props.dispatch(setUserToken());
+        // this.props.history.push("/");
     }
 
     openModal(modal, e) {
