@@ -24,10 +24,10 @@ namespace EducationSystem.WebApi.Controllers
             return Json(project);
         }
 
-        public IHttpActionResult GetAll(string userId)
+        public IHttpActionResult GetAllNotOwnedByUser(string email)
         {
             var service = new ProjectService();
-            var projects = service.GetAll(userId);
+            var projects = service.GetAll(email);
 
             if (projects.Count == 0)
             {
@@ -37,7 +37,7 @@ namespace EducationSystem.WebApi.Controllers
             return Json(projects);
         }
 
-        public IHttpActionResult GetOpenedProjects()
+        public IHttpActionResult GetAllOpen()
         {
             var service = new ProjectService();
             var projects = service.GetOpenedProjects();
@@ -50,7 +50,7 @@ namespace EducationSystem.WebApi.Controllers
             return Json(projects);
         }
 
-        public IHttpActionResult GetProjectsInProgress()
+        public IHttpActionResult GetAllInProgress()
         {
             var service = new ProjectService();
             var projects = service.GetProjectsInProgress();
@@ -63,7 +63,7 @@ namespace EducationSystem.WebApi.Controllers
             return Json(projects);
         }
 
-        public IHttpActionResult GetFinishedProjects()
+        public IHttpActionResult GetAllFinished()
         {
             var service = new ProjectService();
             var projects = service.GetFinishedProjects();
@@ -95,8 +95,9 @@ namespace EducationSystem.WebApi.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
+                var testId = "1a20ab71-bb95-4dea-ba13-08f89eafcec8";
                 var service = new ProjectService();
-                service.Create(userId, project);
+                service.Create(testId, project);
 
                 return Ok();
             }
@@ -125,7 +126,7 @@ namespace EducationSystem.WebApi.Controllers
             }
         }
 
-        public IHttpActionResult GetUserProjects(string username)
+        public IHttpActionResult GetAllByUser(string username)
         {
             var service = new ProjectService();
             var projects = service.GetUserProjects(username);

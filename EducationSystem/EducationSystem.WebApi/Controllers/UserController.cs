@@ -16,6 +16,21 @@ namespace EducationSystem.WebApi.Controllers
             return Json(user);
         }
 
+        public IHttpActionResult GetIdByUsername(string username)
+        {
+            var service = new UserService();
+            string user;
+            try
+            {
+                 user = service.GetIdByUsername(username);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            return Json(user);
+        }
         public IHttpActionResult GetAllUsersBySkill(int skillType, double minumRank)
         {
             var service = new UserService();
@@ -48,16 +63,60 @@ namespace EducationSystem.WebApi.Controllers
             return Json(requestedDevelopers);
         }
 
-        public void AcceptProject(int projectId, string username)
+        public IHttpActionResult AcceptProject(int projectId, string username)
         {
             var service = new UserService();
-            service.AcceptProject(projectId, username);
+            try
+            {
+                service.AcceptProject(projectId, username);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
         }
 
-        public void DeclineProject(int projectId, string username)
+        public IHttpActionResult DeclineProject(int projectId, string username)
         {
             var service = new UserService();
-            service.AcceptProject(projectId, username);
+            try
+            {
+                service.AcceptProject(projectId, username);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        public IHttpActionResult SendRequestToProject(string username, int projectId)
+        {
+            var service = new UserService();
+            try
+            {
+                service.SendRequestToProject(username, projectId);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        public IHttpActionResult AddSkill(string username, int projectId)
+        {
+            var service = new UserService();
+            try
+            {
+                service.AddSkill(username, projectId);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }
