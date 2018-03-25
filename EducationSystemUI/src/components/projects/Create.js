@@ -1,5 +1,7 @@
 import React from 'react';
 import './Create.css';
+import { connect } from 'react-redux';
+import { createProject } from '../../webapi/dbaccess';
 
 class Create extends React.Component {
   constructor(props) {
@@ -12,7 +14,6 @@ class Create extends React.Component {
   }
 
   onChange(e) {
-    console.log(e);
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -21,7 +22,13 @@ class Create extends React.Component {
       e.preventDefault();
     }
 
+    const project = {
+      "UserEmail": this.props.user.email,
+      "Name": this.state.name,
+      "Description": this.state.description
+    }
 
+    createProject(project);
   }
 
   render() {
@@ -44,4 +51,10 @@ class Create extends React.Component {
   }
 }
 
-export default Create;
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(Create);

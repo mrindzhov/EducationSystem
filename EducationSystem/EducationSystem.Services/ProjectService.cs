@@ -16,7 +16,6 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var project = db.Projects.FirstOrDefault(p => p.Id == id);
-
                 return project;
             }
         }
@@ -26,12 +25,11 @@ namespace EducationSystem.Services
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 var project = db.Projects.Where(p => p.Name.Contains(name)).ToList();
-
                 return project;
             }
         }
 
-        public ICollection<Project> GetAll(string email)
+        public ICollection<Project> GetAllNotOwnedByUser(string email)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
@@ -39,11 +37,58 @@ namespace EducationSystem.Services
                 {
                     return db.Projects.Include(p => p.ProductOwner).ToList();
                 }
+                var projects = db.Projects.Where(p => p.ProductOwner.Email != email).ToList();
 
-                var projects = db.Projects;//.Include(p => p.ProductOwner).ToList();
-                var sss = projects.Where(p => p.ProductOwner.Email != email).ToArray();
+                return projects;
+            }
+        }
 
-                return sss;
+        public ICollection<Project> GetAllCreatedByUser(string username)
+        {
+            var projects = new List<Project>();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                projects = db.Projects.Include(p => p.ProductOwner)
+                    .Where(p => p.ProductOwner.UserName == username).ToList();
+            }
+
+            return projects;
+        }
+
+        public ICollection<Project> GetAllRequestedByUser(string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var requestedProjects = db.RequestedProjectRequests
+                    .Where(rp => rp.Account.UserName == username).Include(ap => ap.Project)
+                    .Select(rp => rp.Project)
+                    .ToList();
+                return requestedProjects;
+            }
+        }
+
+        public ICollection<Project> GetAllReceivedByUser(string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var requestedProjects = db.ReceivedProjectRequests
+                    .Where(rp => rp.Account.UserName == username).Include(ap => ap.Project)
+                    .Select(rp => rp.Project)
+                    .ToList();
+                return requestedProjects;
+            }
+        }
+
+        public ICollection<Project> GetAllAcceptedByUser(string username)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var requestedProjects = db.AcceptedProjectRequests
+                    .Where(ap => ap.Account.UserName == username).Include(ap => ap.Project)
+                    .Select(ap => ap.Project)
+                    .ToList();
+                return requestedProjects;
             }
         }
 
@@ -61,9 +106,9 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.Where(p => p.StartDate != null
-                                                   && p.EndDate == null)
-                               .ToList();
+                var projects = db.Projects
+                    .Where(p => p.StartDate != null && p.EndDate == null)
+                    .ToList();
 
                 return projects;
             }
@@ -73,7 +118,9 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.Where(p => p.StartDate != null && p.EndDate != null).ToList();
+                var projects = db.Projects
+                    .Where(p => p.StartDate != null && p.EndDate != null)
+                    .ToList();
 
                 return projects;
             }
@@ -92,25 +139,29 @@ namespace EducationSystem.Services
             }
         }
 
-        public void Create(string userEmail, CreateProjectDTO project)
+        public void Create(CreateProjectDTO projectDto)
         {
-            var userId = "";
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                userId = db.Users.FirstOrDefault(u => u.Email == userEmail).Id;
-
-                var projectModel = new Project();
-                projectModel.Name = project.Name;
-                projectModel.GitHubUrl = project.GitHubUrl;
-                projectModel.Description = project.Description;
-                projectModel.Requirements = project.Requirements;
-                projectModel.SkillsNeeded = project.SkillsNeeded;
-                projectModel.CreateDate = DateTime.Now;
-                projectModel.ProductOwnerId = userId;
-
-                db.Projects.Add(projectModel);
+                var userId = db.Users.FirstOrDefault(u => u.Email == projectDto.UserEmail).Id;
+                Project project = GenerateModel(userId, projectDto);
+                db.Projects.Add(project);
                 db.SaveChanges();
             }
+        }
+
+        private static Project GenerateModel(string userId, CreateProjectDTO projectDto)
+        {
+            return new Project
+            {
+                Name = projectDto.Name,
+                GitHubUrl = projectDto.GitHubUrl,
+                Description = projectDto.Description,
+                Requirements = projectDto.Requirements,
+                SkillsNeeded = projectDto.SkillsNeeded,
+                CreateDate = DateTime.Now,
+                ProductOwnerId = userId
+            };
         }
 
         public void Edit(ProjectFilter filter)
@@ -130,20 +181,6 @@ namespace EducationSystem.Services
 
                 db.SaveChanges();
             }
-        }
-
-        public ICollection<Project> GetUserProjects(string username)
-        {
-            var user = new ApplicationUser();
-            var projects = new List<Project>();
-
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
-            {
-                user = db.Users.FirstOrDefault(u => u.UserName == username);
-                projects = db.Projects.Where(p => p.ProductOwnerId == user.Id).ToList();
-            }
-
-            return projects;
         }
 
         public void AcceptUser(int projectId, string username)

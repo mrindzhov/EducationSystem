@@ -11,8 +11,8 @@ export function register(user) {
             'Content-Type': 'application/json'
         })
     }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
 }
 
 export function login(user) {
@@ -28,6 +28,45 @@ export function login(user) {
             withCredentials: true
         }
     }).then(res => { return res.json() });
+}
+
+export function getCreatedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllCreatedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+}
+
+export function getRequestedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllRequestedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+}
+
+export function getAcceptedProjectsByUser(username) {
+    var url = `${host}api/project/GetAllAcceptedByUser?username=${username}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
 }
 
 export function getAllProjects(userEmail) {
@@ -50,7 +89,7 @@ export function createProject(project) {
         method: 'POST',
         body: data,
         headers: new Headers({
-            'Content-Type': 'text/plain'
+            'Content-Type': 'application/json'
         })
     }).then(res => { return res.json() });
 }
