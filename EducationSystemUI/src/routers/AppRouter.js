@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 const AppRouter = (props) => (
   <BrowserRouter>
-    <body>
+    <div>
       <HeaderNavigation />
       {!props.user.isLogged && <Redirect to="/"></Redirect>}
       <Switch>
@@ -21,7 +21,7 @@ const AppRouter = (props) => (
         <Route exact path="/projects" component={Projects} exact={true} />
         <Route component={NotFoundPage} />
       </Switch>
-    </body>
+    </div>
   </BrowserRouter>
 );
 
