@@ -51,6 +51,7 @@ class HeaderNavigation extends React.Component {
             if (token) {
                 this.props.dispatch(setIsLogged(true));
                 this.props.dispatch(setUserToken(token));
+                localStorage.setItem("token", token);
             } else {
                 console.log("Something went wrong");
             }

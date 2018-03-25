@@ -1,5 +1,5 @@
 const userReducerDefaultState = {
-  isLogged: true,
+  isLogged: false,
   userToken: ''
 };
 
