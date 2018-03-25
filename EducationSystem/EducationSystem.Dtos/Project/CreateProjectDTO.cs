@@ -5,6 +5,8 @@ namespace EducationSystem.Dtos.Project
 {
     public class CreateProjectDTO
     {
+        public string UserEmail { get; set; }
+
         public string Name { get; set; }
 
         public string GitHubUrl { get; set; }

@@ -29,7 +29,7 @@ namespace EducationSystem.Services
             }
         }
 
-        public ICollection<Project> GetAll(string email)
+        public ICollection<Project> GetAllNotOwnedByUser(string email)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
@@ -42,6 +42,7 @@ namespace EducationSystem.Services
                 return projects;
             }
         }
+
         public ICollection<Project> GetAllCreatedByUser(string username)
         {
             var projects = new List<Project>();
@@ -54,6 +55,7 @@ namespace EducationSystem.Services
 
             return projects;
         }
+
         public ICollection<Project> GetAllRequestedByUser(string username)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -65,6 +67,7 @@ namespace EducationSystem.Services
                 return requestedProjects;
             }
         }
+
         public ICollection<Project> GetAllReceivedByUser(string username)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -76,6 +79,7 @@ namespace EducationSystem.Services
                 return requestedProjects;
             }
         }
+
         public ICollection<Project> GetAllAcceptedByUser(string username)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -87,6 +91,7 @@ namespace EducationSystem.Services
                 return requestedProjects;
             }
         }
+
         public ICollection<Project> GetOpenedProjects()
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -134,12 +139,12 @@ namespace EducationSystem.Services
             }
         }
 
-        public void Create(string userEmail, CreateProjectDTO project)
+        public void Create(CreateProjectDTO projectDto)
         {
-            //Not tested for correct userId
-            Project project = GenerateModel(userId, projectDto);
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
+                var userId = db.Users.FirstOrDefault(u => u.Email == projectDto.UserEmail).Id;
+                Project project = GenerateModel(userId, projectDto);
                 db.Projects.Add(project);
                 db.SaveChanges();
             }
@@ -176,20 +181,6 @@ namespace EducationSystem.Services
 
                 db.SaveChanges();
             }
-        }
-
-        public ICollection<Project> GetUserProjects(string username)
-        {
-            var user = new ApplicationUser();
-            var projects = new List<Project>();
-
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
-            {
-                user = db.Users.FirstOrDefault(u => u.UserName == username);
-                projects = db.Projects.Where(p => p.ProductOwnerId == user.Id).ToList();
-            }
-
-            return projects;
         }
 
         public void AcceptUser(int projectId, string username)

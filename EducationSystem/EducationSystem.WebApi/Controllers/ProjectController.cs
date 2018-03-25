@@ -83,7 +83,7 @@ namespace EducationSystem.WebApi.Controllers
         public IHttpActionResult GetAllNotOwnedByUser(string email)
         {
             var service = new ProjectService();
-            var projects = service.GetAll(email);
+            var projects = service.GetAllNotOwnedByUser(email);
 
             return Json(projects);
         }
@@ -97,12 +97,12 @@ namespace EducationSystem.WebApi.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateProjectDTO project, string userEmail)
+        public IHttpActionResult Create(CreateProjectDTO project)
         {
             try
             {
                 var service = new ProjectService();
-                service.Create(userEmail, project);
+                service.Create(project);
 
                 return Ok();
             }
