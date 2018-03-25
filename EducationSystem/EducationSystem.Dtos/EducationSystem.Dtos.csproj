@@ -57,6 +57,7 @@
     <Compile Include="Account\SetPasswordDTO.cs" />
     <Compile Include="Account\UserInfoDTO.cs" />
     <Compile Include="Account\UserLoginInfoDTO.cs" />
+    <Compile Include="User\SkillDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,8 +68,6 @@
       <Name>EducationSystem.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

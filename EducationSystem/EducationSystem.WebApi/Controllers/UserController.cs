@@ -1,10 +1,11 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using EducationSystem.Services;
+using EducationSystem.Dtos.User;
 
 namespace EducationSystem.WebApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
@@ -106,12 +107,12 @@ namespace EducationSystem.WebApi.Controllers
             }
         }
 
-        public IHttpActionResult AddSkill(string username, int projectId)
+        public IHttpActionResult AddSkill(SkillDto skillDto)
         {
             var service = new UserService();
             try
             {
-                service.AddSkill(username, projectId);
+                service.AddSkill(skillDto);
                 return Ok();
             }
             catch (System.Exception)
