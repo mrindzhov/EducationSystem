@@ -29,11 +29,6 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetAll(email);
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
@@ -41,11 +36,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetOpenedProjects();
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
@@ -55,11 +45,6 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetProjectsInProgress();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
@@ -68,11 +53,6 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetFinishedProjects();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
@@ -80,11 +60,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetBySkillTypes(skillIds);
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
@@ -130,11 +105,6 @@ namespace EducationSystem.WebApi.Controllers
         {
             var service = new ProjectService();
             var projects = service.GetUserProjects(username);
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
