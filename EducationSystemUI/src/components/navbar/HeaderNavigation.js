@@ -76,31 +76,33 @@ class HeaderNavigation extends React.Component {
     render() {
         return (
             <div className='header-navigation'>
-                <LoginModal 
-                    email={this.state.email} 
-                    password={this.state.password} 
-                    isOpen={this.state.login} 
-                    closeModal={this.closeModal}
-                    onLogin={this.onLogin}
-                    onChange={this.onChange} />
-                <RegisterModal 
-                    email={this.state.email} 
-                    password={this.state.password} 
-                    isOpen={this.state.register} 
-                    closeModal={this.closeModal}
-                    onRegister={this.onRegister}
-                    onChange={this.onChange} />
-                <ul>
-                    <li><Link to="/"><i className="ion-android-globe"></i></Link></li>
-                    {this.props.user.isLogged &&  <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>}
-                    {this.props.user.isLogged && <li><NavLink to="/projects">Projects</NavLink></li>}
-                </ul>
-                <ul>
-                    {this.props.user.isLogged && <li><NavLink to="/profile">Profile</NavLink></li>}
-                    {this.props.user.isLogged && <li><Link to="/" onClick={() => this.onLogout()}>Logout</Link></li>}
-                    {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("login")}>Login</NavLink></li>}
-                    {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("register")}>Register</NavLink></li>}
-                </ul>
+                <div className="navbar">
+                    <LoginModal 
+                        email={this.state.email} 
+                        password={this.state.password} 
+                        isOpen={this.state.login} 
+                        closeModal={this.closeModal}
+                        onLogin={this.onLogin}
+                        onChange={this.onChange} />
+                    <RegisterModal 
+                        email={this.state.email} 
+                        password={this.state.password} 
+                        isOpen={this.state.register} 
+                        closeModal={this.closeModal}
+                        onRegister={this.onRegister}
+                        onChange={this.onChange} />
+                    <ul>
+                        <li><Link to="/"><i className="ion-android-globe"></i></Link></li>
+                        {this.props.user.isLogged && <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>}
+                        {this.props.user.isLogged && <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>}
+                    </ul>
+                    <ul>
+                        {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("login")}>Login</NavLink></li>}
+                        {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("register")}>Register</NavLink></li>}
+                        {this.props.user.isLogged && <li><NavLink to="/profile">Profile</NavLink></li>}
+                        {this.props.user.isLogged && <li><Link to="/" onClick={() => this.onLogout()}>Logout</Link></li>}
+                    </ul>
+                </div>
             </div>
         );
     }

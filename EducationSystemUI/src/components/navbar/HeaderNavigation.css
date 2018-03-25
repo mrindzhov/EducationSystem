@@ -1,10 +1,19 @@
 .header-navigation {
-    padding: 0 60px;
-    display: flex;
-    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: #1f9c05;
     opacity: 0.8;
     height: 50px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width:80%;
+    height: 50px;
+    margin: 0 auto;
 }
 
 .header-navigation ul {
@@ -39,6 +48,6 @@
     line-height: 50px;
 }
 
-.active {
+.navbar .active {
     border-bottom: 3px solid #de7519;
 }

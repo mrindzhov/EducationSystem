@@ -6,9 +6,9 @@ import './Projects.css';
 import Button from '../button/Button';
 
 const Projects = () => (
-  <div className="section-projects">
+  <section className="section-projects">
     <h2>Projects</h2>
-  </div>
+  </section>
 );
 
 export default Projects;
