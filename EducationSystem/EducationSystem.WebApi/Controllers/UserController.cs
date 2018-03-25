@@ -31,6 +31,7 @@ namespace EducationSystem.WebApi.Controllers
             }
             return Json(user);
         }
+
         public IHttpActionResult GetAllUsersBySkill(int skillType, double minumRank)
         {
             var service = new UserService();
