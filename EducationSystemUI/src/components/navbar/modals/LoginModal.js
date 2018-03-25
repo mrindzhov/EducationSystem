@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import Button from '../../button/Button';
+import ModalButton from './ModalButton';
 import './LoginModal.css';
 
 const LoginModal = (props) => (
@@ -29,7 +29,7 @@ const LoginModal = (props) => (
         value={props.password}
         onChange={props.onChange}></input>
     </div>
-    <Button onClick={props.onLogin}>Login</Button>
+    <ModalButton onClick={props.onLogin}>Login</ModalButton>
   </Modal>
 );
 
