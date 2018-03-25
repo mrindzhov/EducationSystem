@@ -89,7 +89,7 @@ export function createProject(project) {
         method: 'POST',
         body: data,
         headers: new Headers({
-            'Content-Type': 'text/plain'
+            'Content-Type': 'application/json'
         })
     }).then(res => { return res.json() });
 }
