@@ -31,6 +31,16 @@ namespace EducationSystem.Services
             }
         }
 
+        public ICollection<Project> GetAll()
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects.ToArray();
+
+                return projects;
+            }
+        }
+
         public ICollection<Project> GetOpenedProjects()
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -45,7 +55,9 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.Where(p => p.StartDate != null && p.EndDate == null).ToList();
+                var projects = db.Projects.Where(p => p.StartDate != null
+                                                   && p.EndDate == null)
+                               .ToList();
 
                 return projects;
             }
@@ -79,16 +91,14 @@ namespace EducationSystem.Services
             //Not tested for correct userId
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projectModel = new Project
-                {
-                    Name = project.Name,
-                    GitHubUrl = project.GitHubUrl,
-                    Description = project.Description,
-                    Requirements = project.Requirements,
-                    SkillsNeeded = project.SkillsNeeded,
-                    CreateDate = DateTime.Now,
-                    ProductOwnerId = userId
-                };
+                var projectModel = new Project();
+                projectModel.Name = project.Name;
+                projectModel.GitHubUrl = project.GitHubUrl;
+                projectModel.Description = project.Description;
+                projectModel.Requirements = project.Requirements;
+                projectModel.SkillsNeeded = project.SkillsNeeded;
+                projectModel.CreateDate = DateTime.Now;
+                projectModel.ProductOwnerId = userId;
 
                 db.Projects.Add(projectModel);
                 db.SaveChanges();
@@ -106,7 +116,7 @@ namespace EducationSystem.Services
                 project.EndDate = filter.EndDate;
                 project.Description = filter.Description;
                 project.Requirements = filter.Requirements;
-                project.IsTeamFormed = filter.IsTeamFormed;
+                project.IsTeamFormed = filter.StartDate != null ? true : false;
                 project.Resources = filter.Resources;
                 project.SkillsNeeded = filter.SkillsNeeded;
 

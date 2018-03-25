@@ -16,7 +16,25 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var project = service.GetById(id);
 
+            if (project == null)
+            {
+                return NotFound();
+            }
+
             return Json(project);
+        }
+
+        public IHttpActionResult GetAll()
+        {
+            var service = new ProjectService();
+            var projects = service.GetAll();
+
+            if (projects.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Json(projects);
         }
 
         public IHttpActionResult GetOpenedProjects()
@@ -82,8 +100,9 @@ namespace EducationSystem.WebApi.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var message = e.Message;
                 return BadRequest();
             }
         }
@@ -99,8 +118,9 @@ namespace EducationSystem.WebApi.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var message = e.Message;
                 return BadRequest();
             }
         }
