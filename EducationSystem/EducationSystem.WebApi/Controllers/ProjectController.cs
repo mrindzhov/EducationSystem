@@ -9,7 +9,7 @@ using EducationSystem.Services;
 namespace EducationSystem.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ProjectsController : ApiController
+    public class ProjectController : ApiController
     {
         public IHttpActionResult GetById(int id)
         {

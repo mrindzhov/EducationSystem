@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
@@ -21,6 +22,7 @@ namespace EducationSystem.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";

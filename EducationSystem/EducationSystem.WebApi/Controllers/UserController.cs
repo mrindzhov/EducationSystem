@@ -5,8 +5,8 @@ using EducationSystem.Services;
 namespace EducationSystem.WebApi.Controllers
 {
     [Authorize]
-    [EnableCors("*", "*", "*")]
-    public class UsersController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class UserController : ApiController
     {
         public IHttpActionResult GetByUsername(string username)
         {
