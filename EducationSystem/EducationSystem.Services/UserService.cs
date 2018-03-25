@@ -114,10 +114,10 @@ namespace EducationSystem.Services
             }
         }
 
-        //public void AddSkill(int skillNum)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void AddSkill(int skillNum)
+        {
+            throw new NotImplementedException();
+        }
 
         private static List<ApplicationUser> GetUsersWithMatchingRank(int skillType, double minumRank, List<ApplicationUser> usersWithSkill)
         {
