@@ -1,0 +1,12 @@
+.project {
+    border: 1px solid rgba(170, 170, 170, 0.2);
+    border-radius: 2px;
+    width: 30%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.project h3 {
+    font-size: 80%;
+    margin-bottom: 10px;
+}
