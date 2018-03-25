@@ -1,13 +1,11 @@
 ﻿using EducationSystem.Data;
+using EducationSystem.Dtos.User;
 using EducationSystem.Models;
 using EducationSystem.Models.Enums;
 using EducationSystem.Models.Mappings;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EducationSystem.Services
 {
@@ -107,22 +105,22 @@ namespace EducationSystem.Services
                     };
 
                     user.RequestedProjects.Add(userRequest);
-                    project.ReceivedRequests.Remove(projectRequest);
+                    project.ReceivedRequests.Add(projectRequest);
 
                     db.SaveChanges();
                 }
             }
         }
 
-        public void AddSkill(string username, int skillNum)
+        public void AddSkill(SkillDto skillDto)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var user = db.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == username);
+                var user = db.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == skillDto.UserName);
 
                 var skill = new Skill()
                 {
-                    Type = (SkillType)skillNum
+                    Type = skillDto.GetSkillType()
                 };
 
                 user.Skills.Add(skill);
