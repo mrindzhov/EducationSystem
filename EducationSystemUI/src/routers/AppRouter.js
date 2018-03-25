@@ -4,6 +4,7 @@ import HomePage from '../components/home/HomePage';
 import Dashboard from '../components/dashboard/Dashboard';
 import Profile from '../components/profile/Profile';
 import Projects from '../components/projects/Projects';
+import Create from '../components/projects/Create';
 import ReduxTest from '../components/ReduxTest';
 import NotFoundPage from '../components/NotFoundPage';
 import HeaderNavigation from '../components/navbar/HeaderNavigation';
@@ -19,6 +20,7 @@ const AppRouter = (props) => (
         <Route exact path="/dashboard" component={Dashboard} exact={true} />
         <Route exact path="/profile" component={Profile} exact={true} />
         <Route exact path="/projects" component={Projects} exact={true} />
+        <Route exact path="/dashboard/create" component={Create} exact={true} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

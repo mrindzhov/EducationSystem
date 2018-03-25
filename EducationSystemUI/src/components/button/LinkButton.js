@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import './LinkButton.css';
 
 const LinkButton = (props) => (
-  <a href="#" className="btn btn-full">
+  <Link to={props.to} className="btn btn-full">
     {props.children}
-  </a>
+  </Link>
 );
 
 export default LinkButton;

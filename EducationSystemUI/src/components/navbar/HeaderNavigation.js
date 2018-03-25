@@ -102,12 +102,10 @@ class HeaderNavigation extends React.Component {
                         ariaHideApp={false} />
                     <ul>
                         <li><Link to="/"><i className="ion-android-globe"></i></Link></li>
-                        {/* {this.props.user.isLogged &&  */}
+                        {this.props.user.isLogged && 
                         <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>
-                        {/* } */}
-                        {/* {this.props.user.isLogged &&  */}
+                        }
                         <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
-                        {/* } */}
                     </ul>
                     <ul>
                         {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("login")}>Login</NavLink></li>}
