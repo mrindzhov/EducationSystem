@@ -9,14 +9,32 @@ using EducationSystem.Services;
 namespace EducationSystem.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ProjectsController : ApiController
+    public class ProjectController : ApiController
     {
         public IHttpActionResult GetById(int id)
         {
             var service = new ProjectService();
             var project = service.GetById(id);
 
+            if (project == null)
+            {
+                return NotFound();
+            }
+
             return Json(project);
+        }
+
+        public IHttpActionResult GetAll(string userId)
+        {
+            var service = new ProjectService();
+            var projects = service.GetAll(userId);
+
+            if (projects.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Json(projects);
         }
 
         public IHttpActionResult GetOpenedProjects()
@@ -82,8 +100,9 @@ namespace EducationSystem.WebApi.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var message = e.Message;
                 return BadRequest();
             }
         }
@@ -99,8 +118,9 @@ namespace EducationSystem.WebApi.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var message = e.Message;
                 return BadRequest();
             }
         }

@@ -31,6 +31,16 @@ namespace EducationSystem.Services
             }
         }
 
+        public ICollection<Project> GetAll(string userId)
+        {
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                var projects = db.Projects.Where(p => p.ProductOwnerId != userId).ToArray();
+
+                return projects;
+            }
+        }
+
         public ICollection<Project> GetOpenedProjects()
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
@@ -45,7 +55,9 @@ namespace EducationSystem.Services
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.Where(p => p.StartDate != null && p.EndDate == null).ToList();
+                var projects = db.Projects.Where(p => p.StartDate != null
+                                                   && p.EndDate == null)
+                               .ToList();
 
                 return projects;
             }
@@ -79,16 +91,14 @@ namespace EducationSystem.Services
             //Not tested for correct userId
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projectModel = new Project
-                {
-                    Name = project.Name,
-                    GitHubUrl = project.GitHubUrl,
-                    Description = project.Description,
-                    Requirements = project.Requirements,
-                    SkillsNeeded = project.SkillsNeeded,
-                    CreateDate = DateTime.Now,
-                    ProductOwnerId = userId
-                };
+                var projectModel = new Project();
+                projectModel.Name = project.Name;
+                projectModel.GitHubUrl = project.GitHubUrl;
+                projectModel.Description = project.Description;
+                projectModel.Requirements = project.Requirements;
+                projectModel.SkillsNeeded = project.SkillsNeeded;
+                projectModel.CreateDate = DateTime.Now;
+                projectModel.ProductOwnerId = userId;
 
                 db.Projects.Add(projectModel);
                 db.SaveChanges();
@@ -106,7 +116,7 @@ namespace EducationSystem.Services
                 project.EndDate = filter.EndDate;
                 project.Description = filter.Description;
                 project.Requirements = filter.Requirements;
-                project.IsTeamFormed = filter.IsTeamFormed;
+                project.IsTeamFormed = filter.StartDate != null ? true : false;
                 project.Resources = filter.Resources;
                 project.SkillsNeeded = filter.SkillsNeeded;
 
@@ -131,20 +141,30 @@ namespace EducationSystem.Services
         public void AcceptUser(int projectId, string username)
         {
             var project = new Project();
+            var user = new ApplicationUser();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 project = db.Projects.Include(p => p.ReceivedRequests)
                     .FirstOrDefault(p => p.Id == projectId);
+                user = db.Users.Include(u => u.RequestedProjects)
+                    .FirstOrDefault(u => u.UserName == username);
 
                 if (project != null)
                 {
-                    var user = project.ReceivedRequests.
+                    var receivedRequest = project.ReceivedRequests.
                         FirstOrDefault(u => u.Account.UserName == username);
 
-                    project.ReceivedRequests.Remove(user);
-                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest()
-                    { AccountId = user.AccountId, ProjectId = user.ProjectId });
+                    project.ReceivedRequests.Remove(receivedRequest);
+                    project.AcceptedDevelopers.Add(new AcceptedProjectRequest
+                    { AccountId = receivedRequest.AccountId, ProjectId = receivedRequest.ProjectId });
+
+                    var requestedProject = user.RequestedProjects.
+                        FirstOrDefault(u => u.ProjectId == projectId);
+
+                    user.RequestedProjects.Remove(requestedProject);
+                    user.AcceptedProjects.Add(new AcceptedProjectRequest
+                    { AccountId = requestedProject.AccountId, ProjectId = requestedProject.ProjectId });
 
                     db.SaveChanges();
                 }

@@ -14,7 +14,7 @@ const AppRouter = (props) => (
   <BrowserRouter>
     <div>
       <HeaderNavigation />
-      {!props.user.isLogged && <Redirect to="/"></Redirect>}
+      {/* {!props.user.isLogged && <Redirect to="/"></Redirect>} */}
       <Switch>
         <Route exact path="/" component={HomePage} exact={true} />
         <Route exact path="/dashboard" component={Dashboard} exact={true} />
