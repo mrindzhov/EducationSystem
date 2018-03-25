@@ -112,5 +112,19 @@ namespace EducationSystem.Services
                 db.SaveChanges();
             }
         }
+
+        public ICollection<Project> GetUserProjects(string username)
+        {
+            var user = new ApplicationUser();
+            var projects = new List<Project>();
+
+            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            {
+                user = db.Users.FirstOrDefault(u => u.UserName == username);
+                projects = db.Projects.Where(p => p.ProductOwnerId == user.Id).ToList();
+            }
+
+            return projects;
+        }
     }
 }

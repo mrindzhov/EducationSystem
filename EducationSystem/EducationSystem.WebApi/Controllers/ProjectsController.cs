@@ -104,5 +104,18 @@ namespace EducationSystem.WebApi.Controllers
                 return BadRequest();
             }
         }
+
+        public IHttpActionResult GetUserProjects(string username)
+        {
+            var service = new ProjectService();
+            var projects = service.GetUserProjects(username);
+
+            if (projects.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Json(projects);
+        }
     }
 }
