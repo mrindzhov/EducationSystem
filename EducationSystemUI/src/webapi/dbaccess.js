@@ -67,12 +67,6 @@ async function sendRequest(endpoint, method, postObj = null, captchaToken = null
         });
 }
 
-export function get() {
-    return sendRequest(`${host}api/projects/getbyid?id=1`, RequestMethod.GET).then(res => {
-        return res.response.json();
-    });
-}
-
 export function register(user) {
     var url = `${host}api/account/register`;
     var data = user;
@@ -86,4 +80,19 @@ export function register(user) {
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
+}
+
+export function login(user) {
+    var url = `${host}token`;
+    var data = user;
+    return fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: new Headers({
+            'Content-Type': 'text/plain'
+        }),
+        xhrFields: {
+            withCredentials: true
+        }
+    }).then(res => { return res.json() });
 }

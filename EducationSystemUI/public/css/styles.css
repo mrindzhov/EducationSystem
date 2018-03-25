@@ -1,0 +1,10 @@
+section {
+    width: 80%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+section h2 {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(90, 90, 90, 0.3);
+}
