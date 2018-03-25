@@ -1,6 +1,7 @@
-export const setIsLogged = (isLogged = false) => ({
+export const setIsLogged = (isLogged = false, email = '') => ({
     type: 'SET_IS_LOGGED',
-    isLogged
+    isLogged,
+    email
 });
 
 export const setUserToken = (userToken = '') => ({

@@ -31,13 +31,19 @@ namespace EducationSystem.Services
             }
         }
 
-        public ICollection<Project> GetAll(string userId)
+        public ICollection<Project> GetAll(string email)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
-                var projects = db.Projects.Where(p => p.ProductOwnerId != userId).ToArray();
+                if (String.IsNullOrEmpty(email))
+                {
+                    return db.Projects.Include(p => p.ProductOwner).ToList();
+                }
 
-                return projects;
+                var projects = db.Projects;//.Include(p => p.ProductOwner).ToList();
+                var sss = projects.Where(p => p.ProductOwner.Email != email).ToArray();
+
+                return sss;
             }
         }
 
@@ -86,11 +92,13 @@ namespace EducationSystem.Services
             }
         }
 
-        public void Create(string userId, CreateProjectDTO project)
+        public void Create(string userEmail, CreateProjectDTO project)
         {
-            //Not tested for correct userId
+            var userId = "";
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
+                userId = db.Users.FirstOrDefault(u => u.Email == userEmail).Id;
+
                 var projectModel = new Project();
                 projectModel.Name = project.Name;
                 projectModel.GitHubUrl = project.GitHubUrl;

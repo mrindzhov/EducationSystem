@@ -24,54 +24,34 @@ namespace EducationSystem.WebApi.Controllers
             return Json(project);
         }
 
-        public IHttpActionResult GetAll(string userId)
+        public IHttpActionResult GetAllNotOwnedByUser(string email)
         {
             var service = new ProjectService();
-            var projects = service.GetAll(userId);
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
+            var projects = service.GetAll(email);
 
             return Json(projects);
         }
 
-        public IHttpActionResult GetOpenedProjects()
+        public IHttpActionResult GetAllOpen()
         {
             var service = new ProjectService();
             var projects = service.GetOpenedProjects();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
-        public IHttpActionResult GetProjectsInProgress()
+        public IHttpActionResult GetAllInProgress()
         {
             var service = new ProjectService();
             var projects = service.GetProjectsInProgress();
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
-        public IHttpActionResult GetFinishedProjects()
+        public IHttpActionResult GetAllFinished()
         {
             var service = new ProjectService();
             var projects = service.GetFinishedProjects();
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }
@@ -81,22 +61,16 @@ namespace EducationSystem.WebApi.Controllers
             var service = new ProjectService();
             var projects = service.GetBySkillTypes(skillIds);
 
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
-
             return Json(projects);
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateProjectDTO project)
+        public IHttpActionResult Create(CreateProjectDTO project, string userEmail)
         {
             try
             {
-                var userId = User.Identity.GetUserId();
                 var service = new ProjectService();
-                service.Create(userId, project);
+                service.Create(userEmail, project);
 
                 return Ok();
             }
@@ -125,15 +99,10 @@ namespace EducationSystem.WebApi.Controllers
             }
         }
 
-        public IHttpActionResult GetUserProjects(string username)
+        public IHttpActionResult GetAllByUser(string username)
         {
             var service = new ProjectService();
             var projects = service.GetUserProjects(username);
-
-            if (projects.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Json(projects);
         }

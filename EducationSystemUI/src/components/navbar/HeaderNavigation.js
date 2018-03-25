@@ -45,11 +45,12 @@ class HeaderNavigation extends React.Component {
     }
 
     onLogin() {
-        const user = `username=${this.state.email}&password=${this.state.password}&grant_type=password`;
+        const { email, password } = this.state;
+        const user = `username=${email}&password=${password}&grant_type=password`;
         login(user).then(json => {
             const token = json.access_token;
             if (token) {
-                this.props.dispatch(setIsLogged(true));
+                this.props.dispatch(setIsLogged(true, email));
                 this.props.dispatch(setUserToken(token));
                 localStorage.setItem("token", token);
                 console.log(token);
@@ -113,7 +114,7 @@ class HeaderNavigation extends React.Component {
                     <ul>
                         {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("login")}>Login</NavLink></li>}
                         {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("register")}>Register</NavLink></li>}
-                        {this.props.user.isLogged && <li><NavLink to="/profile">Profile</NavLink></li>}
+                        {this.props.user.isLogged && <li><NavLink to="/profile">{this.props.user.email}</NavLink></li>}
                         {this.props.user.isLogged && <li><Link to="/" onClick={() => this.onLogout()}>Logout</Link></li>}
                     </ul>
                 </div>
