@@ -6,9 +6,9 @@ import './Profile.css';
 import Button from '../button/Button';
 
 const Profile = () => (
-  <div>
+  <section>
     <h2>Profile</h2>
-  </div>
+  </section>
 );
 
 export default Profile;

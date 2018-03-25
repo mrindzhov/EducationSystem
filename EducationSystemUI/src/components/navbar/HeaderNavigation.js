@@ -24,6 +24,10 @@ class HeaderNavigation extends React.Component {
         this.onLogout = this.onLogout.bind(this);
     }
 
+    shouldComponentUpdate(props) {
+        return true;
+    }
+
     onChange(e) {
         console.log(e.target.name)
         this.setState({ [e.target.name]: e.target.value});
@@ -44,10 +48,15 @@ class HeaderNavigation extends React.Component {
         const user = `username=${this.state.email}&password=${this.state.password}&grant_type=password`;
         login(user).then(json => {
             const token = json.access_token;
-            console.log(token);
-            this.props.dispatch(setIsLogged(true));
-            this.props.dispatch(setUserToken(token));
-        });
+            if (token) {
+                this.props.dispatch(setIsLogged(true));
+                this.props.dispatch(setUserToken(token));
+                localStorage.setItem("token", token);
+                console.log(token);
+            } else {
+                console.log("Something went wrong");
+            }
+        }).catch(error => console.error('Error:', error));
 
         this.setState({ login: false });
     }
@@ -83,18 +92,22 @@ class HeaderNavigation extends React.Component {
                         isOpen={this.state.login} 
                         closeModal={this.closeModal}
                         onLogin={this.onLogin}
-                        onChange={this.onChange} />
+                        onChange={this.onChange}
+                        ariaHideApp={false} />
                     <RegisterModal 
                         email={this.state.email} 
                         password={this.state.password} 
                         isOpen={this.state.register} 
                         closeModal={this.closeModal}
                         onRegister={this.onRegister}
-                        onChange={this.onChange} />
+                        onChange={this.onChange}
+                        ariaHideApp={false} />
                     <ul>
                         <li><Link to="/"><i className="ion-android-globe"></i></Link></li>
-                        {this.props.user.isLogged && <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>}
-                        {this.props.user.isLogged && <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>}
+                        {this.props.user.isLogged && 
+                        <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>
+                        }
+                        <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
                     </ul>
                     <ul>
                         {!this.props.user.isLogged && <li><NavLink to="#" onClick={() => this.openModal("login")}>Login</NavLink></li>}
