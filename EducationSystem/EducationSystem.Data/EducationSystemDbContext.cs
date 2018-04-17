@@ -5,7 +5,7 @@ namespace EducationSystem.Data
     using EducationSystem.Models;
     using EducationSystem.Models.Mappings;
 
-    public class EducationSystemDbContext : IdentityDbContext<ApplicationUser>, IEducationSystemDbContext
+    public class EducationSystemDbContext : IdentityDbContext<User>, IEducationSystemDbContext
     {
         public EducationSystemDbContext()
             : base("name=EducationSystemDbContext")

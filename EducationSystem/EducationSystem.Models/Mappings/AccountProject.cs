@@ -10,6 +10,6 @@
 
         public Project Project { get; set; }
 
-        public ApplicationUser Account { get; set; }
+        public User Account { get; set; }
     }
 }

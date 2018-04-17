@@ -173,7 +173,7 @@ namespace EducationSystem.Services
         public void AcceptUser(int projectId, string username)
         {
             var project = new Project();
-            var user = new ApplicationUser();
+            var user = new User();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {

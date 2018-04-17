@@ -11,7 +11,7 @@ namespace EducationSystem.Services
 {
     public class UserService
     {
-        public ApplicationUser GetByUsername(string Username)
+        public User GetByUsername(string Username)
         {
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
@@ -29,20 +29,20 @@ namespace EducationSystem.Services
             }
         }
 
-        public ICollection<ApplicationUser> GetAllUsersBySkill(int skillType, double minumRank = 2)
+        public ICollection<User> GetAllUsersBySkill(int skillType, double minumRank = 2)
         {
-            var usersWithSkill = new List<ApplicationUser>();
+            var usersWithSkill = new List<User>();
 
             using (EducationSystemDbContext db = new EducationSystemDbContext())
             {
                 usersWithSkill = db.Users.Where(u => u.Skills.Any(s => s.Type == (SkillType)skillType)).ToList();
             }
-            List<ApplicationUser> targetUsers = GetUsersWithMatchingRank(skillType, minumRank, usersWithSkill);
+            List<User> targetUsers = GetUsersWithMatchingRank(skillType, minumRank, usersWithSkill);
 
             return targetUsers;
         }
 
-        public ICollection<ApplicationUser> GetParticipants(int projectId)
+        public ICollection<User> GetParticipants(int projectId)
         {
             var project = new Project();
 
@@ -56,7 +56,7 @@ namespace EducationSystem.Services
             return participants;
         }
 
-        public ICollection<ApplicationUser> GetReceivedRequests(int projectId)
+        public ICollection<User> GetReceivedRequests(int projectId)
         {
             var project = new Project();
 
@@ -70,7 +70,7 @@ namespace EducationSystem.Services
             return receivedRequests;
         }
 
-        public ICollection<ApplicationUser> GetRequestedDevelopers(int projectId)
+        public ICollection<User> GetRequestedDevelopers(int projectId)
         {
             var project = new Project();
 
@@ -128,9 +128,9 @@ namespace EducationSystem.Services
             }
         }
 
-        private static List<ApplicationUser> GetUsersWithMatchingRank(int skillType, double minumRank, List<ApplicationUser> usersWithSkill)
+        private static List<User> GetUsersWithMatchingRank(int skillType, double minumRank, List<User> usersWithSkill)
         {
-            var targetUsers = new List<ApplicationUser>();
+            var targetUsers = new List<User>();
             foreach (var user in usersWithSkill)
             {
                 Skill targetSkill = user.Skills.FirstOrDefault(s => s.Type == (SkillType)skillType);
