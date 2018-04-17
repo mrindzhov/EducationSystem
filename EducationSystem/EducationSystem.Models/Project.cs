@@ -38,7 +38,7 @@ namespace EducationSystem.Models
 
         public string ProductOwnerId { get; set; }
 
-        public ApplicationUser ProductOwner { get; set; }
+        public User ProductOwner { get; set; }
 
         public ICollection<Feedback> Feedbacks { get; set; }
 

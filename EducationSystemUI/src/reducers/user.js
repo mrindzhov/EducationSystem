@@ -4,8 +4,6 @@ const userReducerDefaultState = {
 };
 
 export default (state = userReducerDefaultState, action) => {
-  
-  console.log(action)
   switch (action.type) {
     case 'SET_IS_LOGGED':
       return {

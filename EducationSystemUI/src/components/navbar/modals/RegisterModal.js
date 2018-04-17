@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import ModalButton from './ModalButton';
 import './RegisterModal.css';
 
+Modal.setAppElement('#root');
+
 const RegisterModal = (props) => (
   <Modal
     isOpen={props.isOpen}

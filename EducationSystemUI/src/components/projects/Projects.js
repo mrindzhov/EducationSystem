@@ -16,10 +16,6 @@ class Projects extends React.Component {
     this.getProjects();
   }
 
-  // componentWillUpdate() {
-  //   this.getProjects();
-  // }
-
   getProjects() {
     const email = this.props.user.email;
     getAllProjects(email).then(projects => {
@@ -33,9 +29,9 @@ class Projects extends React.Component {
         <h2>Projects</h2>
         <div className="projects-container">
           
-          {this.state.projects && this.state.projects.map(project => {
+          {this.state.projects && this.state.projects.map((project, index) => {
             return (
-              <Project project={project}/>
+              <Project key={index} project={project}/>
             );
           })}
         </div>

@@ -8,16 +8,16 @@ using EducationSystem.Models.Mappings;
 namespace EducationSystem.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public class User : IdentityUser
     {
-        public ApplicationUser()
+        public User()
         {
             this.Skills = new HashSet<Skill>();
             this.AcceptedProjects = new HashSet<AcceptedProjectRequest>();
             this.RequestedProjects = new HashSet<RequestedProjectRequest>();
             this.ReceivedProjectRequests = new HashSet<ReceivedProjectRequest>();
         }
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);

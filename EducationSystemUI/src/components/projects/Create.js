@@ -1,13 +1,17 @@
 import React from 'react';
 import './Create.css';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { createProject } from '../../webapi/dbaccess';
 
 class Create extends React.Component {
   constructor(props) {
     super(props);
     
-    this.state = {}
+    this.state = {
+      name: '',
+      description: '',
+    }
 
     this.onChange = this.onChange.bind(this);
     this.handleCreateProject = this.handleCreateProject.bind(this);
@@ -25,10 +29,12 @@ class Create extends React.Component {
     const project = {
       "UserEmail": this.props.user.email,
       "Name": this.state.name,
-      "Description": this.state.description
+      "Description": this.state.description,
+      "ProductOwner": this.props.user.email
     }
 
     createProject(project);
+    this.props.history.push("/dashboard");
   }
 
   render() {
@@ -57,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Create);
+export default withRouter(connect(mapStateToProps)(Create));

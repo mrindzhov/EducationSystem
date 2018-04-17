@@ -3,7 +3,6 @@ const host = "http://localhost:58530/";
 export function register(user) {
     var url = `${host}api/account/register`;
     var data = user;
-    console.log(JSON.stringify(data))
     fetch(url, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data),
@@ -69,8 +68,6 @@ export function getAcceptedProjectsByUser(username) {
 export function getAllProjects(userEmail) {
     const search = userEmail ? userEmail : "";
     var url = `${host}api/project/getAllNotOwnedByUser?email=${search}`;
-    var data = userEmail;
-    console.log(data);
     return fetch(url, {
         method: 'GET',
         headers: new Headers({
@@ -89,4 +86,14 @@ export function createProject(project) {
             'Content-Type': 'application/json'
         })
     }).then(res => res);
+}
+
+export function getProjectDetailsById(id) {
+    var url = `${host}api/project/getById?id=${id}`;
+    return fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(res => { return res.json() });
 }
