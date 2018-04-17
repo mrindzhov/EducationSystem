@@ -11,20 +11,27 @@ namespace EducationSystem.Services
 {
     public class UserService
     {
+        private readonly EducationSystemDbContext ctx;
+
+        public UserService()
+        {
+            ctx = new EducationSystemDbContext();
+        }
+
         public User GetByUsername(string Username)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.FirstOrDefault(x => x.UserName == Username);
+                var user = ctx.Users.FirstOrDefault(x => x.UserName == Username);
                 return user;
             }
         }
 
         public string GetIdByUsername(string username)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.FirstOrDefault(x => x.UserName == username);
+                var user = ctx.Users.FirstOrDefault(x => x.UserName == username);
                 return user.Id;
             }
         }
@@ -33,9 +40,9 @@ namespace EducationSystem.Services
         {
             var usersWithSkill = new List<User>();
 
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                usersWithSkill = db.Users.Where(u => u.Skills.Any(s => s.Type == (SkillType)skillType)).ToList();
+                usersWithSkill = ctx.Users.Where(u => u.Skills.Any(s => s.Type == (SkillType)skillType)).ToList();
             }
             List<User> targetUsers = GetUsersWithMatchingRank(skillType, minumRank, usersWithSkill);
 
@@ -46,9 +53,9 @@ namespace EducationSystem.Services
         {
             var project = new Project();
 
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                project = db.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == projectId);
+                project = ctx.Projects.Include(p => p.AcceptedDevelopers).FirstOrDefault(p => p.Id == projectId);
             }
 
             var participants = project.AcceptedDevelopers?.Select(d => d.Account).ToList();
@@ -60,9 +67,9 @@ namespace EducationSystem.Services
         {
             var project = new Project();
 
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                project = db.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == projectId);
+                project = ctx.Projects.Include(p => p.ReceivedRequests).FirstOrDefault(p => p.Id == projectId);
             }
 
             var receivedRequests = project.ReceivedRequests?.Select(d => d.Account).ToList();
@@ -74,9 +81,9 @@ namespace EducationSystem.Services
         {
             var project = new Project();
 
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                project = db.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == projectId);
+                project = ctx.Projects.Include(p => p.RequestedDevelopers).FirstOrDefault(p => p.Id == projectId);
             }
 
             var participants = project.RequestedDevelopers?.Select(d => d.Account).ToList();
@@ -86,15 +93,15 @@ namespace EducationSystem.Services
 
         public void SendRequestToProject(string username, int projectId)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.Include(x => x.RequestedProjects).FirstOrDefault(x => x.UserName == username);
-                var project = db.Projects.Include(x => x.ReceivedRequests).FirstOrDefault(x => x.Id == projectId);
+                var user = ctx.Users.Include(x => x.RequestedProjects).FirstOrDefault(x => x.UserName == username);
+                var project = ctx.Projects.Include(x => x.ReceivedRequests).FirstOrDefault(x => x.Id == projectId);
                 if (user != null && project != null)
                 {
                     var userRequest = new RequestedProjectRequest()
                     {
-                        AccountId =user.Id,
+                        AccountId = user.Id,
                         ProjectId = projectId
                     };
 
@@ -107,16 +114,16 @@ namespace EducationSystem.Services
                     user.RequestedProjects.Add(userRequest);
                     project.ReceivedRequests.Add(projectRequest);
 
-                    db.SaveChanges();
+                    ctx.SaveChanges();
                 }
             }
         }
 
         public void AddSkill(SkillDto skillDto)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == skillDto.UserName);
+                var user = ctx.Users.Include(x => x.Skills).FirstOrDefault(x => x.UserName == skillDto.UserName);
 
                 var skill = new Skill()
                 {
@@ -124,7 +131,7 @@ namespace EducationSystem.Services
                 };
 
                 user.Skills.Add(skill);
-                db.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
@@ -156,11 +163,11 @@ namespace EducationSystem.Services
 
         public void AcceptProject(int projectId, string username)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
-                var project = db.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
-                if (user != null && project!=null)
+                var user = ctx.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+                var project = ctx.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
+                if (user != null && project != null)
                 {
                     var userRequest = user.ReceivedProjectRequests
                         .FirstOrDefault(x => x.ProjectId == projectId && x.Account.UserName == username);
@@ -183,17 +190,17 @@ namespace EducationSystem.Services
                         ProjectId = projectRequest.ProjectId
                     });
 
-                    db.SaveChanges();
+                    ctx.SaveChanges();
                 }
             }
         }
 
         public void DeclineProject(int projectId, string username)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
-                var project = db.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
+                var user = ctx.Users.Include(x => x.ReceivedProjectRequests).FirstOrDefault(x => x.UserName == username);
+                var project = ctx.Projects.Include(x => x.RequestedDevelopers).FirstOrDefault(x => x.Id == projectId);
 
                 if (user != null)
                 {
@@ -205,7 +212,7 @@ namespace EducationSystem.Services
                     user.ReceivedProjectRequests.Remove(userRequest);
                     project.RequestedDevelopers.Remove(projectRequest);
 
-                    db.SaveChanges();
+                    ctx.SaveChanges();
                 }
             }
         }

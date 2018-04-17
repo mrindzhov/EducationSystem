@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Web.Http.Cors;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
@@ -21,16 +20,10 @@ using EducationSystem.Dtos.Account;
 namespace EducationSystem.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
-    //[EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class AccountController : ApiController
+    public class AccountController : AbstractApiController
     {
         private const string LocalLoginProvider = "Local";
         private UserManager _userManager;
-
-        public AccountController()
-        {
-        }
 
         public AccountController(UserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)

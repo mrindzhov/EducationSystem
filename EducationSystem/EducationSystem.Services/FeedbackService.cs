@@ -9,19 +9,26 @@ namespace EducationSystem.Services
 {
     public class FeedbackService
     {
+        private readonly EducationSystemDbContext ctx;
+
+        public FeedbackService()
+        {
+            ctx = new EducationSystemDbContext();
+        }
+
         public Feedback GetById(int id)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var feedback = db.Feedbacks.FirstOrDefault(p => p.Id == id);
+                var feedback = ctx.Feedbacks.FirstOrDefault(p => p.Id == id);
                 return feedback;
             }
         }
         public ICollection<Feedback> GetByUser(string userName)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var feedbacks = db.Feedbacks.Include(f => f.User)
+                var feedbacks = ctx.Feedbacks.Include(f => f.User)
                     .Where(p => p.User.UserName == userName)
                     .ToList();
                 return feedbacks;
@@ -29,9 +36,9 @@ namespace EducationSystem.Services
         }
         public ICollection<Feedback> GetByProject(int projectId)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var feedbacks = db.Projects.Include(p => p.Feedbacks)
+                var feedbacks = ctx.Projects.Include(p => p.Feedbacks)
                     .Where(p => p.Id == projectId)
                     .FirstOrDefault()
                     .Feedbacks.ToList();
@@ -41,9 +48,9 @@ namespace EducationSystem.Services
 
         public void RateUserByItsProject(int projectId, string username, int rate, string comment)
         {
-            using (EducationSystemDbContext db = new EducationSystemDbContext())
+            using (ctx)
             {
-                var user = db.Users.FirstOrDefault(x => x.UserName == username);
+                var user = ctx.Users.FirstOrDefault(x => x.UserName == username);
                 var feedback = new Feedback()
                 {
                     UserId = user.Id,
@@ -51,7 +58,7 @@ namespace EducationSystem.Services
                     Rating = (FeedbackRating)rate
                 };
 
-                var project = db.Projects.Include(x=>x.Feedbacks).FirstOrDefault(x => x.Id == projectId);
+                var project = ctx.Projects.Include(x => x.Feedbacks).FirstOrDefault(x => x.Id == projectId);
                 project.Feedbacks.Add(feedback);
             }
         }
