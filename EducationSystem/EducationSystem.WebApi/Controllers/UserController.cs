@@ -84,7 +84,7 @@ namespace EducationSystem.WebApi.Controllers
             var service = new UserService();
             try
             {
-                service.AcceptProject(projectId, username);
+                service.DeclineProject(projectId, username);
                 return Ok();
             }
             catch (System.Exception)
