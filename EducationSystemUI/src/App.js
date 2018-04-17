@@ -5,9 +5,6 @@ import AppRouter from './routers/AppRouter';
 import './App.css';
 
 const store = configureStore();
-const state = store.getState();
-
-console.log(state.user.isLogged);
 
 const jsx = (
   <Provider store={store}>

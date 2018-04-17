@@ -1,39 +1,46 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { getProjectDetailsById } from '../../webapi/dbaccess';
+import './ProjectDetails.css';
 
-const project =  {
-    "Id": 4,
-    "Name": "Second Project",
-    "CreateDate": "2018-03-25T10:45:31.76",
-    "GitHubUrl": null,
-    "StartDate": null,
-    "EndDate": null,
-    "EstimationDate": null,
-    "Description": "Second Description",
-    "Requirements": null,
-    "IsTeamFormed": false,
-    "ProductOwnerId": null,
-    "ProductOwner": "Owner",
-    "Feedbacks": [],
-    "Resources": [],
-    "SkillsNeeded": [],
-    "AcceptedDevelopers": [ "Pesho", "Asen" ],
-    "RequestedDevelopers": [],
-    "ReceivedRequests": []
+class ProjectDetails extends React.Component {
+    constructor(props) {
+      super(props);
+      
+      this.state = {}
+    }
+
+    componentDidMount() {
+        this.getProjectDetails();
+    }
+
+    getProjectDetails() {
+        const id = this.props.match.params.id;
+        getProjectDetailsById(id).then(json => {
+            this.setState({ project: json });
+        })
+    }
+
+    render() {
+        if (!this.state.project) {
+            return null;
+        }
+        
+        return (
+          <section className="section-create">
+            <h2>Project name: {this.state.project.Name}</h2>
+            <p className="project-description">Project description: {this.state.project.Description}</p>
+            <h3>Team Members:</h3>
+            <div>
+                {this.state.project.AcceptedDevelopers && this.state.project.AcceptedDevelopers.map(developer => {
+                    return (
+                        <div>developer</div>
+                    );
+                })}
+            </div>
+        </section>
+        )
+    }
 }
 
-const ProjectDetails = () => (
-  <section className="section-create">
-    <h2>{project.Name} ({project.ProductOwner})</h2>
-    <p>{project.Description}</p>
-    <h3>Team</h3>
-    <div>
-        {project.AcceptedDevelopers && project.AcceptedDevelopers.map(developer => {
-            return (
-                <div>developer</div>
-            );
-        })}
-    </div>
-  </section>
-);
-
-export default ProjectDetails;
+export default withRouter(ProjectDetails);

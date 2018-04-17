@@ -29,21 +29,18 @@ class Dashboard extends React.Component {
 
   getCreatedProjectsByUser() {
     getCreatedProjectsByUser(this.props.user.email).then(json => {
-      console.log(json);
       this.setState({ createdProjects: json });
     })
   }
 
   getAcceptedProjectsByUser() {
     getAcceptedProjectsByUser(this.props.user.email).then(json => {
-      console.log(json);
       this.setState({ involvedProjects: json });
     })
   }
 
   getRequestedProjectsByUser() {
     getRequestedProjectsByUser(this.props.user.email).then(json => {
-      console.log(json);
       this.setState({ requestedProjects: json });
     })
   }
@@ -52,41 +49,45 @@ class Dashboard extends React.Component {
   render() {
     return (
       <section className="section-dashboard">
-    <h2>Dashboard</h2>
-    <section>
-      <div>
-        <h3>Created Projects</h3>
+      <h2>Dashboard</h2>
+        <div>
+          <h2>Created Projects</h2>
+          <div className="projects-container">
+            {this.state.createdProjects ? this.state.createdProjects.map((project, index) => {
+              return (
+                <Project key={index} project={project} />
+              );
+            }) : <div>(empty)</div>
+            }
+          </div>
+        </div>
+        <div>
+          <h2>Involved Projects</h2>
+          <div className="projects-container">
+            {this.state.involvedProjects ? this.state.involvedProjects.map((project, index) => {
+              return (
+                <Project key={index} project={project} />
+              );
+            }) : <div>(empty)</div>
+            }
+          </div>
+        </div>
+        <div>
+          <h2>Requested Projects</h2>
+          <div className="projects-container">
+            {this.state.requestedProjects ? this.state.requestedProjects.map((project, index) => {
+              return (
+                <Project key={index} project={project} />
+              );
+            }) : <div>(empty)</div>
+            }
+          </div>
+        </div>
+
         <div className="row">
           <LinkButton to="/dashboard/create">Create New</LinkButton>
         </div>
-        {this.state.createdProjects ? this.state.createdProjects.map(project => {
-          return (
-            <Project project={project} />
-          );
-        }) : <div>(empty)</div>
-        }
-      </div>
-      <div>
-        <h3>Involved Projects</h3>
-        {this.state.involvedProjects ? this.state.involvedProjects.map(project => {
-          return (
-            <Project project={project} />
-          );
-        }) : <div>(empty)</div>
-        }
-      </div>
-      <div>
-        <h3>Requested Projects</h3>
-        {this.state.requestedProjects ? this.state.requestedProjects.map(project => {
-          return (
-            <Project project={project} />
-          );
-        }) : <div>(empty)</div>
-        }
-      </div>
-
-    </section >
-  </section>
+    </section>
     )
   }
 }

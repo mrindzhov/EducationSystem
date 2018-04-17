@@ -14,6 +14,7 @@ class HeaderNavigation extends React.Component {
         this.state = {
             name: '',
             password: '',
+            email: '',
         };
 
         this.openModal = this.openModal.bind(this);
@@ -25,12 +26,10 @@ class HeaderNavigation extends React.Component {
     }
 
     onChange(e) {
-        console.log(e.target.name)
         this.setState({ [e.target.name]: e.target.value});
     }
 
     onRegister() {
-        console.log("reg")
         const user = {
             "Email": this.state.email,
             "Password": this.state.password
@@ -49,7 +48,6 @@ class HeaderNavigation extends React.Component {
                 this.props.dispatch(setIsLogged(true, email));
                 this.props.dispatch(setUserToken(token));
                 localStorage.setItem("token", token);
-                console.log(token);
             } else {
                 console.log("Something went wrong");
             }

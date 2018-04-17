@@ -8,7 +8,7 @@ const Project = (props) => (
       <h3>{props.project.Name}</h3>
       <p className="description">{props.project.Description}</p>
       <Button>Apply</Button>
-      <LinkButton to={`/projects/id=${props.project.Id}`}>View</LinkButton>
+      <LinkButton to={`/projects/${props.project.Id}`}>View</LinkButton>
   </div>
 );
 
