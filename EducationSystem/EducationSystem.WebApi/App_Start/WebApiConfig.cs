@@ -9,8 +9,7 @@ namespace EducationSystem.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            EnableCorsAttribute corsAttribute = new EnableCorsAttribute("*", "*", "GET,POST");
-            config.EnableCors(corsAttribute);
+            config.EnableCors();
 
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
