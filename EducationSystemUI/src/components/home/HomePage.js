@@ -5,7 +5,7 @@ const HomePage = () => (
   <div>
     <header className="home-header">
       <div className="hero-box">
-        <h1>Teamstarter</h1>
+        <h1></h1>
       </div>
     </header>
   </div>

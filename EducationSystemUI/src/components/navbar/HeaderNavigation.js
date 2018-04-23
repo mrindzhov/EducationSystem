@@ -6,6 +6,7 @@ import RegisterModal from './modals/RegisterModal';
 import { register, login } from '../../webapi/dbaccess';
 import { connect } from 'react-redux';
 import { setIsLogged, setUserToken } from '../../actions/user';
+import {NotificationContainer} from 'react-notifications';
 
 class HeaderNavigation extends React.Component {
     constructor(props) {
@@ -48,8 +49,6 @@ class HeaderNavigation extends React.Component {
                 this.props.dispatch(setIsLogged(true, email));
                 this.props.dispatch(setUserToken(token));
                 localStorage.setItem("token", token);
-            } else {
-                console.log("Something went wrong");
             }
         }).catch(error => console.error('Error:', error));
 
@@ -59,7 +58,7 @@ class HeaderNavigation extends React.Component {
     onLogout() {
         this.props.dispatch(setIsLogged());
         this.props.dispatch(setUserToken());
-        // this.props.history.push("/");
+        this.props.history.push("/");
     }
 
     openModal(modal, e) {
@@ -112,6 +111,8 @@ class HeaderNavigation extends React.Component {
                         {this.props.user.isLogged && <li><Link to="/" onClick={() => this.onLogout()}>Logout</Link></li>}
                     </ul>
                 </div>
+
+                <NotificationContainer />
             </div>
         );
     }

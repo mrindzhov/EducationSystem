@@ -1,5 +1,5 @@
 header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url(./header-background.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url(/img/header-background.jpg);
     color: white;
     height: 100vh;
     background-position: center;

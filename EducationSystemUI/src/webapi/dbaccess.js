@@ -1,3 +1,5 @@
+import { NotificationManager } from "react-notifications";
+
 const host = "http://localhost:58530/";
 
 export function register(user) {
@@ -9,9 +11,19 @@ export function register(user) {
         headers: new Headers({
             'Content-Type': 'application/json'
         })
-    }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            res.json().then(json => {
+                NotificationManager.error(json.Message);
+            })
+        }
+     })
+    .catch(err => {
+        NotificationManager.error(err.Message);
+    });
 }
 
 export function login(user) {
@@ -20,13 +32,23 @@ export function login(user) {
     return fetch(url, {
         method: 'POST',
         body: data,
+        mode: 'cors',
         headers: new Headers({
             'Content-Type': 'text/plain'
-        }),
-        xhrFields: {
-            withCredentials: true
+        })
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            res.json().then(json => {
+                NotificationManager.error(json.error_description);
+            })
         }
-    }).then(res => { return res.json() });
+     })
+    .catch(err => {
+        NotificationManager.error(err);
+    });
 }
 
 export function getCreatedProjectsByUser(username) {
