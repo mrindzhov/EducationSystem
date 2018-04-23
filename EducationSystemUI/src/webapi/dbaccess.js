@@ -21,9 +21,7 @@ export function register(user) {
             })
         }
      })
-    .catch(err => {
-        NotificationManager.error(err.Message);
-    });
+     .catch(error => console.error('Error:', error));
 }
 
 export function login(user) {
@@ -46,9 +44,7 @@ export function login(user) {
             })
         }
      })
-    .catch(err => {
-        NotificationManager.error(err);
-    });
+     .catch(error => console.error('Error:', error));
 }
 
 export function getCreatedProjectsByUser(username) {
